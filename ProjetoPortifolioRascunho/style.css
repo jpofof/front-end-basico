@@ -1,0 +1,86 @@
+/* ESTILO GERAL */
+
+body{
+    background-color: #EADBC8;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+}
+
+/* HEADER */
+
+header{
+    text-align: center;
+}
+
+header h1{
+    color: #1B3A2E;
+    text-decoration: underline;
+}
+
+/* Foto do perfil */
+
+header img{
+    width: 150px;
+    border-radius: 30px;
+    display: block;
+    margin: 20px auto;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+header img:hover{
+    transform: scale(1.05);
+    box-shadow: 0px 10px 30px rgba(0,0,0,0.3);
+}
+
+/* SEÇÕES */
+
+section{
+    background-color: #FFF8F0;
+    border: 2px solid #5C4B3B;
+    border-radius: 20px;
+    padding: 20px;
+    margin: 30px 40px;
+    box-shadow: 0px 4px 12px rgba(0,0,0,0.15);
+}
+
+section h2{
+    font-size: 25px;
+    color: #1B3A2E;
+}
+
+/* TABELA DE PROJETOS */
+
+table{
+    width: 100%;
+    border-collapse: collapse;
+}
+
+td{
+    border: 1px solid #8D6E63;
+    padding: 25px;
+    line-height: 1.7;
+}
+
+/* linhas alternadas */
+
+table tr:nth-child(odd){
+    background-color: #F5EFE6;
+}
+
+table tr:nth-child(even){
+    background-color: #EADBC8;
+}
+
+/* imagens dos projetos */
+
+table img{
+    width: 300px;
+    border-radius: 10px;
+    display: block;
+    margin: auto;
+    transition: transform 0.3s;
+}
+
+table img:hover{
+    transform: scale(1.08);
+}

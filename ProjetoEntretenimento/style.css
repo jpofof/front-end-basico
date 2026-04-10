@@ -1,0 +1,35 @@
+section {
+    background-color: #261A22;
+    margin-bottom: 10px;
+}
+
+header,
+footer {
+    background-color: #C9DFF2;
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
+nav ul li {
+    display: inline-block;
+    list-style-type: none;
+    text-decoration: none;
+    margin: 5px 20px 5px 20px;
+    padding: 20px;
+    background-color: orange;
+    border-radius: 20px;
+    font-family: "Roboto", sans-serif;
+
+}
+
+
+
+nav ul li:hover {
+    background-color: red;
+    transition-duration: 0.85s;
+}
+
+#fotos img:hover {
+    transform: scale(1.05);
+    transition-duration: 0.85s;
+}

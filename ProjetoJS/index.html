@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="João Pedro">
+<title>ProjetoJS_1</title>
+</head>
+
+<body>
+
+<!-- OPERAÇÕES BÁSICAS (EXTRA) -->
+<h3>Operações Básicas</h3>
+
+<label>Número da Soma 1:</label>
+<input type="text" id="soma1">
+<label>Número da Soma 2:</label>
+<input type="text" id="soma2">
+<input type="button" value="Somar" onclick="Somar()">
+<br><br>
+
+<label>Número da Subtração 1:</label>
+<input type="text" id="sub1">
+<label>Número da Subtração 2:</label>
+<input type="text" id="sub2">
+<input type="button" value="Subtrair" onclick="Subtrair()">
+<br><br>
+
+<label>Número da Multiplicação 1:</label>
+<input type="text" id="mult1">
+<label>Número da Multiplicação 2:</label>
+<input type="text" id="mult2">
+<input type="button" value="Multiplicar" onclick="multiplicar()">
+<br><br>
+
+<label>Número da Divisão 1:</label>
+<input type="text" id="div1">
+<label>Número da Divisão 2:</label>
+<input type="text" id="div2">
+<input type="button" value="Dividir" onclick="divisao()">
+<br><br>
+
+<label>Número da Exponenciação 1:</label>
+<input type="text" id="exp1">
+<label>Número da Exponenciação 2:</label>
+<input type="text" id="exp2">
+<input type="button" value="Exponenciação" onclick="exponenciacao()">
+<br><br>
+
+<label>Número da Raiz 1:</label>
+<input type="text" id="raiz1">
+<input type="button" value="Raiz" onclick="raiz1()">
+<br><br>
+
+<label>Número da Raiz 2:</label>
+<input type="text" id="raiz2">
+<input type="button" value="Raiz" onclick="raiz2()">
+<br><br>
+
+<!-- EXERCÍCIO 1 - AUMENTO DE SALÁRIO -->
+<h3>1- Aumento de Salário</h3>
+<label>Seu Salario:</label>
+<input type="text" id="Salario">
+<label>Percentual de Aumento:</label>
+<input type="text" id="Percentual">
+<br><br>
+<input type="button" value="Calcular Aumento" onclick="CalculoPercentualdoSalario()">
+<br><br>
+
+<!-- EXERCÍCIO 2 - ÁREA DO TRIÂNGULO -->
+<h3>2- Área do Triângulo</h3>
+<label>Base:</label>
+<input type="text" id="base">
+<label>Altura:</label>
+<input type="text" id="altura">
+<br><br>
+<input type="button" value="Área do Triângulo" onclick="AreaTriangulo()">
+<br><br>
+
+<!-- EXERCÍCIO 3 - MÉDIA PONDERADA -->
+<h3>3- Média Ponderada</h3>
+<label>Nota 1:</label>
+<input type="text" id="nota1">
+<label>Nota 2:</label>
+<input type="text" id="nota2">
+<br><br>
+<input type="button" value="Calcular Média Ponderada" onclick="CalcularMediaPonderada()">
+<br><br>
+
+<!-- EXERCÍCIO 4 - IDADE -->
+<h3>4- Idade</h3>
+<label>Ano de nascimento:</label>
+<input type="text" id="nascimento">
+<br><br>
+<input type="button" value="Calcular idade" onclick="idade()">
+<br><br>
+
+<!-- EXERCÍCIO 5 - CONSUMO DE GASOLINA -->
+<h3>5- Consumo de Gasolina</h3>
+<label>Distância (km):</label>
+<input type="text" id="Distancia">
+<label>Volume (litros):</label>
+<input type="text" id="Volume">
+<br><br>
+<input type="button" value="Calcular Consumo" onclick="CalculodoTanque()">
+<br><br>
+
+<!-- EXERCÍCIO 6 - SALÁRIO 62H -->
+<h3>6 - Salário com Hora Extra</h3>
+<label>Valor da Hora:</label>
+<input type="text" id="ValorHora">
+<label>Refeições:</label>
+<input type="text" id="refeicao">
+<br><br>
+<input type="button" value="Calcular Salário" onclick="CalculoSalario()">
+<br><br>
+
+<!-- EXERCÍCIO 7 - PAR OU ÍMPAR -->
+<h3>7 - Número Aleatório</h3>
+<input type="button" value="Gerar Número" onclick="checarParImpar()">
+<br><br>
+
+<script>
+
+function Somar(){
+let num1 = Number(document.getElementById("soma1").value);
+let num2 = Number(document.getElementById("soma2").value);
+alert("Soma: " + (num1 + num2));
+}
+
+function Subtrair(){
+let num1 = Number(document.getElementById("sub1").value);
+let num2 = Number(document.getElementById("sub2").value);
+alert("Subtração: " + (num1 - num2));
+}
+
+function multiplicar(){
+let num1 = Number(document.getElementById("mult1").value);
+let num2 = Number(document.getElementById("mult2").value);
+alert("Multiplicação: " + (num1 * num2));
+}
+
+function divisao(){
+let num1 = Number(document.getElementById("div1").value);
+let num2 = Number(document.getElementById("div2").value);
+alert("Divisão: " + (num1 / num2));
+}
+
+function exponenciacao(){
+let num1 = Number(document.getElementById("exp1").value);
+let num2 = Number(document.getElementById("exp2").value);
+alert("Exponenciação: " + (num1 ** num2));
+}
+
+function raiz1(){
+let num1 = Number(document.getElementById("raiz1").value);
+alert("Raiz: " + Math.sqrt(num1));
+}
+
+function raiz2(){
+let num2 = Number(document.getElementById("raiz2").value);
+alert("Raiz: " + Math.sqrt(num2));
+}
+function CalculoPercentualdoSalario(){
+let num1 = Number(document.getElementById("Salario").value);
+let num2 = Number(document.getElementById("Percentual").value);
+let resultado = num1 + (num1 * num2/100);
+alert("Novo salário: " + resultado);
+}
+
+function AreaTriangulo(){
+let base = Number(document.getElementById("base").value);
+let altura = Number(document.getElementById("altura").value);
+let resultado = (base * altura) / 2;
+alert("Área: " + resultado);
+}
+
+function CalcularMediaPonderada(){
+let num1 = Number(document.getElementById("nota1").value);
+let num2 = Number(document.getElementById("nota2").value);
+let resultado = (num1 * 0.3) + (num2 * 0.7);
+alert("Média: " + resultado);
+}
+
+function idade(){
+let nascimento = Number(document.getElementById("nascimento").value);
+let anoAtual = new Date().getFullYear();
+let anos = anoAtual - nascimento;
+let meses = anos * 12;
+let semanas = anos * 52;
+let dias = anos * 365;
+let horas = dias * 24;
+let minutos = horas * 60;
+let idade2050 = 2050 - nascimento;
+
+alert("Anos: " + anos);
+alert("Meses: " + meses);
+alert("Semanas: " + semanas);
+alert("Dias: " + dias);
+alert("Horas: " + horas);
+alert("Minutos: " + minutos);
+alert("Idade em 2050: " + idade2050);
+}
+
+function CalculodoTanque(){
+let num1 = Number(document.getElementById("Distancia").value);
+let num2 = Number(document.getElementById("Volume").value);
+let resultado = num1 / num2;
+alert("Consumo: " + resultado + " km/L");
+}
+
+function CalculoSalario(){
+let horastrab = 62;
+let horasNormais = 40;
+let horasExtras = horastrab - horasNormais;
+
+let valorh = Number(document.getElementById("ValorHora").value);
+let refeicoes = Number(document.getElementById("refeicao").value);
+
+let pagamentonormal = valorh * horasNormais;
+let pagamentoextra = valorh * horasExtras * 3;
+
+let salariobruto = pagamentonormal + pagamentoextra;
+let descontoref = refeicoes * 1.50;
+let salarioliq = salariobruto - descontoref;
+
+alert("Salário bruto: R$ " + salariobruto.toFixed(2));
+alert("Desconto: R$ " + descontoref.toFixed(2));
+alert("Salário líquido: R$ " + salarioliq.toFixed(2));
+}
+
+function checarParImpar(){
+let numero = Math.floor(Math.random() * 100) + 1;
+
+if (numero % 2 === 0){
+alert("Número: " + numero + " - PAR");
+}else{
+alert("Número: " + numero + " - ÍMPAR");
+}
+}
+
+</script>
+
+</body>
+</html>
