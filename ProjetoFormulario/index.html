@@ -11,6 +11,13 @@
     <label for="nomeAnimal">Nome do Animal: </label>
     <input type="text" name="nomeAnimal" id="nomeAnimal" placeholder="Digite o Nome do Animal..." size=20
         maxlength="20">
+
+    <label for="telefone">Telefone</label>
+    <input type="tel" name="telefone" id="telefone">
+
+    <!-- o tel aciona o teclado numérico, enquanto o text exibe o teclado alfanumérico padrão. 
+    Ambos aceitam texto livre por padrão, mas o tel é ideal para telefones. -->
+
     <!-- max é para maximo em numero -->
 
     <!-- maxlenght é para caractere -->
@@ -21,6 +28,7 @@
     e id usado mais em javascript, por exemplo -->
 
     <br><br>
+    <hr>
 
 
     <label for="racaAnimal">Raça do Animal</label>
@@ -51,17 +59,20 @@
     </select>
 
     <br><br>
+    <hr>
 
     <label for="corAnimal">Cor do Animal</label>
     <input type="color" name="corAnimal" id="corAnimal">
 
     <br><br>
+    <hr>
 
     <label for="temperamento">Temperamento</label>
     <input type="range" name="temperamento" id="temperamento" min="0" max="100" step="10">
     <!-- step é ara a qtd que vai para frente -->
 
     <br><br>
+    <hr>
 
     <label for="porte">Porte do Animal</label>
     <!-- radio para a escolha de uma opção apenas (nesse caso o tamanho) -->
@@ -79,17 +90,49 @@
     outras opções cancelando a anteriormente selecionada -->
 
     <br><br>
+    <hr>
 
     <label for="pacote">Pacote de Serviços:</label>
+
+    <br><br>
+    <hr>
 
     <label for="banho">Banho</label>
     <input type="checkbox" name="banho" id="banho">
 
+    <br><br>
+
     <label for="tosaSimples">Tosa Simples</label>
     <input type="checkbox" name="tosaSimples" id="tosaSimples">
 
+    <br><br>
+
     <label for="tosaHigi">Tosa Higiênica</label>
     <input type="checkbox" name="tosaHigi" id="tosaHigi">
+
+    <br><br>
+    <hr>
+
+    <label for="dataNasc">Data de Nascimento</label>
+    <input type="date" name="dataNasc" id="dataNasc" max="2026-04-14">
+    <!-- A data de nascimento so pode ter data maxima ate hoje 04/14  -->
+
+    <br><br>
+    <hr>
+
+    <label for="carteira">Carteira Vacinação</label>
+    <input type="file" name="carteira" id="carteira">
+    <!-- file é para adicionar algum arquivo -->
+
+    <br><br>
+    <hr>
+
+    <label for="observacao">Observação do Animal:</label>
+    <textarea name="observacao" id="observacao" cols="30" rows="5">Coloque as informações do seu pet aqui...
+
+    </textarea>
+
+    <!-- textarea é para o usuario adicionar infos, por exemplo -->
 
 
 
