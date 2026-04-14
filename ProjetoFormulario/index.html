@@ -11,6 +11,17 @@
     <label for="nomeAnimal">Nome do Animal: </label>
     <input type="text" name="nomeAnimal" id="nomeAnimal" placeholder="Digite o Nome do Animal..." size=20
         maxlength="20">
+    <!-- max é para maximo em numero -->
+
+    <!-- maxlenght é para caractere -->
+
+    <!-- size é para o tamanho (não obrigatorio) dos caracteres que a pessoa colocar -->
+
+    <!-- name é mais utilizado em banco de dados (podendo conter valores do produto, por exemplo)
+    e id usado mais em javascript, por exemplo -->
+
+    <br><br>
+
 
     <label for="racaAnimal">Raça do Animal</label>
     <select name="racaAnimal" id="racaAnimal">
@@ -23,6 +34,8 @@
             <option value="Pastor Alemao">Pastor Alemão</option>
 
         </optgroup>
+        <!-- optgroup é para cirar um grupo de opções -->
+        <!-- option é a opção do grupo -->
 
         <optgroup label="Selvagem">
 
@@ -36,6 +49,49 @@
 
 
     </select>
+
+    <br><br>
+
+    <label for="corAnimal">Cor do Animal</label>
+    <input type="color" name="corAnimal" id="corAnimal">
+
+    <br><br>
+
+    <label for="temperamento">Temperamento</label>
+    <input type="range" name="temperamento" id="temperamento" min="0" max="100" step="10">
+    <!-- step é ara a qtd que vai para frente -->
+
+    <br><br>
+
+    <label for="porte">Porte do Animal</label>
+    <!-- radio para a escolha de uma opção apenas (nesse caso o tamanho) -->
+
+    <input type="radio" name="porte" id="pequeno" checked> <!-- checked é para opção checada antes -->
+    <label for="pequeno">Pequeno</label>
+
+    <input type="radio" name="porte" id="medio">
+    <label for="medio">Médio</label>
+
+    <input type="radio" name="porte" id="grande">
+    <label for="grande">Grande</label>
+
+    <!-- partindo do mesmo name é possivel escolher 
+    outras opções cancelando a anteriormente selecionada -->
+
+    <br><br>
+
+    <label for="pacote">Pacote de Serviços:</label>
+
+    <label for="banho">Banho</label>
+    <input type="checkbox" name="banho" id="banho">
+
+    <label for="tosaSimples">Tosa Simples</label>
+    <input type="checkbox" name="tosaSimples" id="tosaSimples">
+
+    <label for="tosaHigi">Tosa Higiênica</label>
+    <input type="checkbox" name="tosaHigi" id="tosaHigi">
+
+
 
 </body>
 
