@@ -1,11 +1,42 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulario</title>
 </head>
+
 <body>
-    
+    <label for="nomeAnimal">Nome do Animal: </label>
+    <input type="text" name="nomeAnimal" id="nomeAnimal" placeholder="Digite o Nome do Animal..." size=20
+        maxlength="20">
+
+    <label for="racaAnimal">Raça do Animal</label>
+    <select name="racaAnimal" id="racaAnimal">
+
+        <optgroup label="Doméstico">
+
+            <option value="PitBull">PitBull</option>
+            <option value="Caramelo">Caramelo</option>
+            <option value="Bulldogue Frances">Bulldogue Francês</option>
+            <option value="Pastor Alemao">Pastor Alemão</option>
+
+        </optgroup>
+
+        <optgroup label="Selvagem">
+
+            <option value="Cobra">Cobra</option>
+            <option value="Passaro">Passaro</option>
+            <option value="Bulldogue Frances">Peixe</option>
+            <option value="Caramelo">Cavalo</option>
+
+        </optgroup>
+
+
+
+    </select>
+
 </body>
+
 </html>
