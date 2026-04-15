@@ -8,131 +8,151 @@
 </head>
 
 <body>
-    <label for="nomeAnimal">Nome do Animal: </label>
-    <input type="text" name="nomeAnimal" id="nomeAnimal" placeholder="Digite o Nome do Animal..." size=20
-        maxlength="20">
 
-    <label for="telefone">Telefone</label>
-    <input type="tel" name="telefone" id="telefone">
+    <form id="Formulario"> <!-- mais utilizado para formularo -->
+        <!-- <label for="senha">Senha</label> 
+    <input type="password" name="senha" id="senha"> -->
 
-    <!-- o tel aciona o teclado numérico, enquanto o text exibe o teclado alfanumérico padrão. 
+        <label for="nomeAnimal">Nome do Animal: </label>
+        <input type="text" name="nomeAnimal" id="nomeAnimal" placeholder="Digite o Nome do Animal..." size=20
+            maxlength="20" required>
+
+        <label for="telefone">Telefone</label>
+        <input type="tel" name="telefone" id="telefone" placeholder="(99)99999-9999"
+            pattern="\([0-9]{2}\)[\s][0-9]{4}-[0-9]{4}" required>
+
+        <!--  o pattern verifica se o formato de texto é o mesmo que foi solicitado-->
+
+        <!-- o required deixa o campo obrigatório -->
+
+        <!-- o placeholder coloca uma orientação do texto que deve ser inserido, o seu formato -->
+
+        <!-- o tel aciona o teclado numérico, enquanto o text exibe o teclado alfanumérico padrão. 
     Ambos aceitam texto livre por padrão, mas o tel é ideal para telefones. -->
 
-    <!-- max é para maximo em numero -->
+        <!-- max é para maximo em numero -->
 
-    <!-- maxlenght é para caractere -->
+        <!-- maxlenght é para caractere -->
 
-    <!-- size é para o tamanho (não obrigatorio) dos caracteres que a pessoa colocar -->
+        <!-- size é para o tamanho (não obrigatorio) dos caracteres que a pessoa colocar -->
 
-    <!-- name é mais utilizado em banco de dados (podendo conter valores do produto, por exemplo)
+        <!-- name é mais utilizado em banco de dados (podendo conter valores do produto, por exemplo)
     e id usado mais em javascript, por exemplo -->
 
-    <br><br>
-    <hr>
+        <br><br>
+        <hr>
 
 
-    <label for="racaAnimal">Raça do Animal</label>
-    <select name="racaAnimal" id="racaAnimal">
+        <label for="racaAnimal">Raça do Animal</label>
+        <select name="racaAnimal" id="racaAnimal">
 
-        <optgroup label="Doméstico">
+            <optgroup label="Doméstico">
 
-            <option value="PitBull">PitBull</option>
-            <option value="Caramelo">Caramelo</option>
-            <option value="Bulldogue Frances">Bulldogue Francês</option>
-            <option value="Pastor Alemao">Pastor Alemão</option>
+                <option value="PitBull">PitBull</option>
+                <option value="Caramelo">Caramelo</option>
+                <option value="Bulldogue Frances">Bulldogue Francês</option>
+                <option value="Pastor Alemao">Pastor Alemão</option>
 
-        </optgroup>
-        <!-- optgroup é para cirar um grupo de opções -->
-        <!-- option é a opção do grupo -->
+            </optgroup>
+            <!-- optgroup é para cirar um grupo de opções -->
+            <!-- option é a opção do grupo -->
 
-        <optgroup label="Selvagem">
+            <optgroup label="Selvagem">
 
-            <option value="Cobra">Cobra</option>
-            <option value="Passaro">Passaro</option>
-            <option value="Bulldogue Frances">Peixe</option>
-            <option value="Caramelo">Cavalo</option>
+                <option value="Cobra">Cobra</option>
+                <option value="Passaro">Passaro</option>
+                <option value="Bulldogue Frances">Peixe</option>
+                <option value="Caramelo">Cavalo</option>
 
-        </optgroup>
+            </optgroup>
 
 
 
-    </select>
+        </select>
 
-    <br><br>
-    <hr>
+        <br><br>
+        <hr>
 
-    <label for="corAnimal">Cor do Animal</label>
-    <input type="color" name="corAnimal" id="corAnimal">
+        <label for="corAnimal">Cor do Animal</label>
+        <input type="color" name="corAnimal" id="corAnimal">
 
-    <br><br>
-    <hr>
+        <br><br>
+        <hr>
 
-    <label for="temperamento">Temperamento</label>
-    <input type="range" name="temperamento" id="temperamento" min="0" max="100" step="10">
-    <!-- step é ara a qtd que vai para frente -->
+        <label for="temperamento">Temperamento</label>
+        <input type="range" name="temperamento" id="temperamento" min="0" max="100" step="10">
+        <!-- step é ara a qtd que vai para frente -->
 
-    <br><br>
-    <hr>
+        <br><br>
+        <hr>
 
-    <label for="porte">Porte do Animal</label>
-    <!-- radio para a escolha de uma opção apenas (nesse caso o tamanho) -->
+        <label for="porte">Porte do Animal</label>
+        <!-- radio para a escolha de uma opção apenas (nesse caso o tamanho) -->
 
-    <input type="radio" name="porte" id="pequeno" checked> <!-- checked é para opção checada antes -->
-    <label for="pequeno">Pequeno</label>
+        <input type="radio" name="porte" id="pequeno" checked> <!-- checked é para opção checada antes -->
+        <label for="pequeno">Pequeno</label>
 
-    <input type="radio" name="porte" id="medio">
-    <label for="medio">Médio</label>
+        <input type="radio" name="porte" id="medio">
+        <label for="medio">Médio</label>
 
-    <input type="radio" name="porte" id="grande">
-    <label for="grande">Grande</label>
+        <input type="radio" name="porte" id="grande">
+        <label for="grande">Grande</label>
 
-    <!-- partindo do mesmo name é possivel escolher 
+        <!-- partindo do mesmo name é possivel escolher 
     outras opções cancelando a anteriormente selecionada -->
 
-    <br><br>
-    <hr>
+        <br><br>
+        <hr>
 
-    <label for="pacote">Pacote de Serviços:</label>
+        <label for="pacote">Pacote de Serviços:</label>
 
-    <br><br>
-    <hr>
+        <br><br>
+        <hr>
 
-    <label for="banho">Banho</label>
-    <input type="checkbox" name="banho" id="banho">
+        <label for="banho">Banho</label>
+        <input type="checkbox" name="banho" id="banho">
 
-    <br><br>
+        <br><br>
 
-    <label for="tosaSimples">Tosa Simples</label>
-    <input type="checkbox" name="tosaSimples" id="tosaSimples">
+        <label for="tosaSimples">Tosa Simples</label>
+        <input type="checkbox" name="tosaSimples" id="tosaSimples">
 
-    <br><br>
+        <br><br>
 
-    <label for="tosaHigi">Tosa Higiênica</label>
-    <input type="checkbox" name="tosaHigi" id="tosaHigi">
+        <label for="tosaHigi">Tosa Higiênica</label>
+        <input type="checkbox" name="tosaHigi" id="tosaHigi">
 
-    <br><br>
-    <hr>
+        <br><br>
+        <hr>
 
-    <label for="dataNasc">Data de Nascimento</label>
-    <input type="date" name="dataNasc" id="dataNasc" max="2026-04-14">
-    <!-- A data de nascimento so pode ter data maxima ate hoje 04/14  -->
+        <label for="dataNasc">Data de Nascimento</label>
+        <input type="date" name="dataNasc" id="dataNasc" max="2026-04-14">
+        <!-- A data de nascimento so pode ter data maxima ate hoje 04/14  -->
 
-    <br><br>
-    <hr>
+        <br><br>
+        <hr>
 
-    <label for="carteira">Carteira Vacinação</label>
-    <input type="file" name="carteira" id="carteira">
-    <!-- file é para adicionar algum arquivo -->
+        <label for="carteira">Carteira Vacinação</label>
+        <input type="file" name="carteira" id="carteira">
+        <!-- file é para adicionar algum arquivo -->
 
-    <br><br>
-    <hr>
+        <br><br>
+        <hr>
 
-    <label for="observacao">Observação do Animal:</label>
-    <textarea name="observacao" id="observacao" cols="30" rows="5">Coloque as informações do seu pet aqui...
+        <label for="observacao">Observação do Animal:</label>
+        <textarea name="observacao" id="observacao" cols="30" rows="5">Coloque as informações do seu pet aqui...
 
     </textarea>
 
-    <!-- textarea é para o usuario adicionar infos, por exemplo -->
+        <!-- textarea é para o usuario adicionar infos, por exemplo -->
+
+        <br><br> <hr>
+
+        <input type="button" value="Cadastrar">
+        <input type="button" value="Submeter">
+        <button> Enviar Dados </button>
+
+    </form>
 
 
 
