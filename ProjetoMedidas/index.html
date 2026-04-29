@@ -1,0 +1,2039 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tipos de Medidas CSS — Grupo 7</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f0eeea;
+      --paper: #ffffff;
+      --ink: #18181b;
+      --muted: #71717a;
+      --soft: #a1a1aa;
+      --border: #e4e4e7;
+      --border-dark: #d4d4d8;
+      --accent: #1d4ed8;
+      --accent-bg: #eff6ff;
+      --green: #15803d;
+      --green-bg: #f0fdf4;
+      --red: #b91c1c;
+      --amber: #92400e;
+      --amber-bg: #fffbeb;
+      --code-bg: #18181b;
+      --shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 4px 16px rgba(0, 0, 0, 0.04);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'IBM Plex Sans', sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    /* TOPBAR */
+    .topbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 200;
+      background: var(--paper);
+      border-bottom: 1px solid var(--border);
+      height: 52px;
+      display: flex;
+      align-items: center;
+      padding: 0 20px;
+      gap: 2px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    .topbar::-webkit-scrollbar {
+      display: none;
+    }
+
+    .brand {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--soft);
+      white-space: nowrap;
+      padding-right: 18px;
+      margin-right: 6px;
+      border-right: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .nav-btn {
+      padding: 5px 13px;
+      border: none;
+      background: transparent;
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--muted);
+      cursor: pointer;
+      border-radius: 5px;
+      white-space: nowrap;
+      transition: color .12s, background .12s;
+      flex-shrink: 0;
+    }
+
+    .nav-btn:hover {
+      color: var(--ink);
+      background: #f4f4f5;
+    }
+
+    .nav-btn.active {
+      color: var(--accent);
+      background: var(--accent-bg);
+      font-weight: 500;
+    }
+
+    .counter {
+      margin-left: auto;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--soft);
+      white-space: nowrap;
+      padding-left: 16px;
+      flex-shrink: 0;
+    }
+
+    /* LAYOUT */
+    main {
+      padding: 80px 16px 60px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .wrap {
+      width: 100%;
+      max-width: 840px;
+    }
+
+    .slide {
+      display: none;
+      animation: appear .2s ease;
+    }
+
+    .slide.active {
+      display: block;
+    }
+
+    @keyframes appear {
+      from {
+        opacity: 0;
+        transform: translateY(6px)
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0)
+      }
+    }
+
+    /* CARD */
+    .card {
+      background: var(--paper);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 36px 44px;
+      box-shadow: var(--shadow);
+      margin-bottom: 14px;
+    }
+
+    /* SLIDE HEADER */
+    .slide-no {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--soft);
+      text-transform: uppercase;
+      letter-spacing: .09em;
+      margin-bottom: 6px;
+    }
+
+    .slide-title {
+      font-size: 22px;
+      font-weight: 700;
+      line-height: 1.25;
+      margin-bottom: 4px;
+    }
+
+    .slide-sub {
+      font-size: 13.5px;
+      color: var(--muted);
+      margin-bottom: 24px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .slide-sub a {
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 12px;
+    }
+
+    /* CODE */
+    .code {
+      background: var(--code-bg);
+      border-radius: 8px;
+      padding: 18px 22px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12.5px;
+      line-height: 1.85;
+      color: #e2e8f0;
+      overflow-x: auto;
+      margin: 14px 0;
+      position: relative;
+    }
+
+    .code-tag {
+      position: absolute;
+      top: 9px;
+      right: 13px;
+      font-size: 10px;
+      color: #3f3f46;
+      text-transform: uppercase;
+      letter-spacing: .07em;
+      font-family: 'IBM Plex Sans', sans-serif;
+    }
+
+    .cp {
+      color: #7dd3fc
+    }
+
+    .cv {
+      color: #86efac
+    }
+
+    .cs {
+      color: #fde68a
+    }
+
+    .cu {
+      color: #f9a8d4;
+      font-weight: 600
+    }
+
+    .cc {
+      color: #94a3b8
+    }
+
+    .cn {
+      color: #fb923c
+    }
+
+    /* BADGES */
+    .badge {
+      display: inline-block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11.5px;
+      font-weight: 700;
+      padding: 2px 9px;
+      border-radius: 4px;
+    }
+
+    .b-px {
+      background: #fef3c7;
+      color: #78350f
+    }
+
+    .b-em {
+      background: #d1fae5;
+      color: #064e3b
+    }
+
+    .b-rem {
+      background: #dbeafe;
+      color: #1e3a8a
+    }
+
+    .b-pct {
+      background: #ffedd5;
+      color: #7c2d12
+    }
+
+    .b-vw {
+      background: #fce7f3;
+      color: #831843
+    }
+
+    .b-vh {
+      background: #ede9fe;
+      color: #4c1d95
+    }
+
+    .b-ch {
+      background: #ecfdf5;
+      color: #052e16
+    }
+
+    .b-ex {
+      background: #f3e8ff;
+      color: #3b0764
+    }
+
+    .b-vmin {
+      background: #e0f2fe;
+      color: #0c4a6e
+    }
+
+    .b-vmax {
+      background: #fdf4ff;
+      color: #581c87
+    }
+
+    /* GRIDS */
+    .g2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .g3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 12px;
+    }
+
+    /* BOXES */
+    .box {
+      border-radius: 6px;
+      padding: 13px 16px;
+      font-size: 13.5px;
+      line-height: 1.55;
+      margin: 12px 0;
+    }
+
+    .box-blue {
+      background: var(--accent-bg);
+      border-left: 3px solid var(--accent);
+      color: #1e3a8a;
+    }
+
+    .box-green {
+      background: var(--green-bg);
+      border-left: 3px solid var(--green);
+      color: #14532d;
+    }
+
+    .box-red {
+      background: #fef2f2;
+      border-left: 3px solid var(--red);
+      color: #7f1d1d;
+    }
+
+    .box-amber {
+      background: var(--amber-bg);
+      border-left: 3px solid #d97706;
+      color: var(--amber);
+    }
+
+    /* TABLE */
+    .tbl {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13.5px;
+      margin: 12px 0;
+    }
+
+    .tbl th {
+      background: var(--ink);
+      color: #fff;
+      padding: 9px 13px;
+      text-align: left;
+      font-weight: 600;
+      font-size: 12px;
+    }
+
+    .tbl th:first-child {
+      border-radius: 6px 0 0 0;
+    }
+
+    .tbl th:last-child {
+      border-radius: 0 6px 0 0;
+    }
+
+    .tbl td {
+      padding: 9px 13px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+
+    .tbl tr:hover td {
+      background: #fafafa;
+    }
+
+    .tbl code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+    }
+
+    /* UNIT CARD */
+    .ucard {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px;
+    }
+
+    .ucard h4 {
+      font-size: 13.5px;
+      font-weight: 600;
+      margin: 8px 0 5px;
+    }
+
+    .ucard p {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    /* DEMO */
+    .demo {
+      background: #f8f8f8;
+      border: 1px dashed var(--border-dark);
+      border-radius: 8px;
+      padding: 20px;
+      margin-top: 14px;
+    }
+
+    .demo-title {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--soft);
+      margin-bottom: 14px;
+    }
+
+    label {
+      font-size: 13px;
+      color: var(--muted);
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    label b {
+      color: var(--ink);
+    }
+
+    input[type=range] {
+      width: 100%;
+      accent-color: var(--accent);
+      margin-bottom: 12px;
+      cursor: pointer;
+    }
+
+    input[type=number] {
+      width: 100%;
+      padding: 7px 10px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px;
+      outline: none;
+    }
+
+    input[type=number]:focus {
+      border-color: var(--accent);
+    }
+
+    .bar {
+      height: 40px;
+      background: var(--accent);
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      transition: width .08s;
+      white-space: nowrap;
+      padding: 0 10px;
+      min-width: 60px;
+    }
+
+    .font-preview {
+      background: var(--paper);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 14px 18px;
+      transition: font-size .08s;
+    }
+
+    .fp-label {
+      font-size: 11px;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--soft);
+      margin-top: 5px;
+    }
+
+    /* CAPA */
+    .cover {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 52px 40px 44px;
+    }
+
+    .cover-mark {
+      width: 56px;
+      height: 56px;
+      background: var(--ink);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 24px;
+    }
+
+    .cover-mark svg {
+      fill: #fff;
+    }
+
+    .cover-tag {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .09em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: var(--accent-bg);
+      padding: 3px 12px;
+      border-radius: 20px;
+      margin-bottom: 18px;
+    }
+
+    .cover h1 {
+      font-size: 30px;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 10px;
+    }
+
+    .cover p {
+      font-size: 14.5px;
+      color: var(--muted);
+      max-width: 480px;
+      line-height: 1.65;
+      margin-bottom: 28px;
+    }
+
+    .cover-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      justify-content: center;
+      margin-bottom: 30px;
+    }
+
+    .cover-info {
+      display: flex;
+      gap: 28px;
+      font-size: 13px;
+      color: var(--muted);
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .cover-info b {
+      color: var(--ink);
+    }
+
+    .divider {
+      width: 1px;
+      background: var(--border);
+    }
+
+    /* ARROWS */
+    .arrows {
+      display: flex;
+      justify-content: space-between;
+      padding: 0 2px;
+    }
+
+    .arr {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      background: var(--paper);
+      border: 1px solid var(--border);
+      padding: 7px 16px;
+      border-radius: 7px;
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--ink);
+      cursor: pointer;
+      transition: all .13s;
+    }
+
+    .arr:hover {
+      background: var(--ink);
+      color: #fff;
+      border-color: var(--ink);
+    }
+
+    .arr:disabled {
+      opacity: .3;
+      pointer-events: none;
+    }
+
+    /* COMPARE */
+    .cmp-head {
+      display: grid;
+      grid-template-columns: 80px 1fr 1fr 1fr 1fr;
+      background: var(--ink);
+      color: #fff;
+      border-radius: 7px 7px 0 0;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .cmp-row {
+      display: grid;
+      grid-template-columns: 80px 1fr 1fr 1fr 1fr;
+      border-bottom: 1px solid var(--border);
+      font-size: 13px;
+    }
+
+    .cmp-row:hover>div {
+      background: #fafafa;
+    }
+
+    .cmp-head>div,
+    .cmp-row>div {
+      padding: 9px 12px;
+    }
+
+    .ok {
+      color: var(--green);
+      font-weight: 600;
+    }
+
+    .no {
+      color: var(--red);
+    }
+
+    .par {
+      color: #a16207;
+    }
+
+    p {
+      margin-bottom: 10px;
+    }
+
+    strong {
+      font-weight: 600;
+    }
+
+    h3 {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    /* ── MENU MOBILE ── */
+    .mob-bar {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 300;
+      background: var(--paper);
+      border-bottom: 1px solid var(--border);
+      height: 52px;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 16px;
+    }
+
+    .mob-brand {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--soft);
+      letter-spacing: .07em;
+      text-transform: uppercase;
+    }
+
+    .mob-slide-info {
+      font-size: 12px;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--muted);
+    }
+
+    .mob-ham {
+      width: 36px;
+      height: 36px;
+      border: 1px solid var(--border);
+      border-radius: 7px;
+      background: var(--paper);
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      flex-shrink: 0;
+    }
+
+    .mob-ham span {
+      display: block;
+      width: 16px;
+      height: 1.5px;
+      background: var(--ink);
+      border-radius: 2px;
+      transition: all .2s;
+    }
+
+    /* Drawer */
+    .mob-drawer {
+      display: none;
+      position: fixed;
+      top: 52px;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 299;
+      background: var(--paper);
+      overflow-y: auto;
+      flex-direction: column;
+      padding: 12px 0 24px;
+      border-top: 1px solid var(--border);
+    }
+
+    .mob-drawer.open {
+      display: flex;
+    }
+
+    .mob-nav-btn {
+      padding: 13px 20px;
+      border: none;
+      background: transparent;
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-size: 15px;
+      font-weight: 400;
+      color: var(--ink);
+      text-align: left;
+      cursor: pointer;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background .1s;
+    }
+
+    .mob-nav-btn:hover {
+      background: #f4f4f5;
+    }
+
+    .mob-nav-btn.active {
+      color: var(--accent);
+      font-weight: 600;
+      background: var(--accent-bg);
+    }
+
+    .mob-nav-btn .slide-num {
+      font-size: 11px;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--soft);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 700px) {
+
+      /* Troca topbar por mob-bar */
+      .topbar {
+        display: none;
+      }
+
+      .mob-bar {
+        display: flex;
+      }
+
+      main {
+        padding-top: 68px;
+        padding-left: 12px;
+        padding-right: 12px;
+        padding-bottom: 40px;
+      }
+
+      .card {
+        padding: 22px 18px;
+        border-radius: 8px;
+      }
+
+      /* Grids viram coluna única */
+      .g2,
+      .g3 {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+
+      /* Títulos menores */
+      .slide-title {
+        font-size: 18px;
+      }
+
+      .slide-sub {
+        font-size: 13px;
+        margin-bottom: 18px;
+        padding-bottom: 16px;
+      }
+
+      /* Capa */
+      .cover {
+        padding: 32px 12px 28px;
+      }
+
+      .cover h1 {
+        font-size: 22px;
+      }
+
+      .cover p {
+        font-size: 13.5px;
+      }
+
+      .cover-info {
+        gap: 12px;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .cover-info .divider {
+        display: none;
+      }
+
+      /* Código — fonte menor, scroll horizontal */
+      .code {
+        font-size: 11.5px;
+        padding: 14px 14px;
+        line-height: 1.75;
+      }
+
+      /* Tabelas: scroll horizontal em wrapper */
+      .tbl-wrap {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        border-radius: 6px;
+      }
+
+      .tbl {
+        min-width: 440px;
+        font-size: 12.5px;
+      }
+
+      .tbl th,
+      .tbl td {
+        padding: 8px 10px;
+      }
+
+      /* Tabela comparativa — colapsa colunas menos importantes */
+      .cmp-head,
+      .cmp-row {
+        grid-template-columns: 70px 1fr 1fr;
+      }
+
+      .cmp-head>div:nth-child(n+4),
+      .cmp-row>div:nth-child(n+4) {
+        display: none;
+      }
+
+      /* Demos */
+      .demo {
+        padding: 14px;
+      }
+
+      .demo-title {
+        font-size: 10px;
+        margin-bottom: 10px;
+      }
+
+      /* Boxes */
+      .box {
+        font-size: 13px;
+        padding: 11px 13px;
+      }
+
+      /* ucard */
+      .ucard {
+        padding: 13px;
+      }
+
+      .ucard h4 {
+        font-size: 13px;
+      }
+
+      .ucard p {
+        font-size: 12.5px;
+      }
+
+      /* Botões de navegar */
+      .arr {
+        padding: 9px 14px;
+        font-size: 13px;
+      }
+
+      .arrows {
+        padding: 0;
+      }
+
+      /* Font previews no slide 3 */
+      .font-preview {
+        padding: 10px 12px;
+      }
+
+      /* bar do vh fica menor */
+      #vh-bar {
+        width: 56px;
+      }
+
+      /* h3 */
+      h3 {
+        font-size: 14px;
+      }
+
+      p {
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- MOBILE BAR -->
+  <div class="mob-bar">
+    <span class="mob-brand">DSM · Grupo 7</span>
+    <span class="mob-slide-info" id="mob-slide-info">1 / 11</span>
+    <button class="mob-ham" id="mob-ham" onclick="toggleDrawer()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+  <!-- MOBILE DRAWER -->
+  <div class="mob-drawer" id="mob-drawer">
+    <button class="mob-nav-btn active" onclick="goMob(0)"><span>Início</span><span class="slide-num">01</span></button>
+    <button class="mob-nav-btn" onclick="goMob(1)"><span>Dois grupos</span><span class="slide-num">02</span></button>
+    <button class="mob-nav-btn" onclick="goMob(2)"><span>Absolutas</span><span class="slide-num">03</span></button>
+    <button class="mob-nav-btn" onclick="goMob(3)"><span>em e rem</span><span class="slide-num">04</span></button>
+    <button class="mob-nav-btn" onclick="goMob(4)"><span>Porcentagem</span><span class="slide-num">05</span></button>
+    <button class="mob-nav-btn" onclick="goMob(5)"><span>Viewport</span><span class="slide-num">06</span></button>
+    <button class="mob-nav-btn" onclick="goMob(6)"><span>ch e ex</span><span class="slide-num">07</span></button>
+    <button class="mob-nav-btn" onclick="goMob(7)"><span>clamp()</span><span class="slide-num">08</span></button>
+    <button class="mob-nav-btn" onclick="goMob(8)"><span>Conversão</span><span class="slide-num">09</span></button>
+    <button class="mob-nav-btn" onclick="goMob(9)"><span>Comparativo</span><span class="slide-num">10</span></button>
+    <button class="mob-nav-btn" onclick="goMob(10)"><span>Quando usar</span><span class="slide-num">11</span></button>
+  </div>
+
+  <nav class="topbar">
+    <span class="brand">DSM · Grupo 7</span>
+    <button class="nav-btn active" onclick="go(0)">Início</button>
+    <button class="nav-btn" onclick="go(1)">Dois grupos</button>
+    <button class="nav-btn" onclick="go(2)">Absolutas</button>
+    <button class="nav-btn" onclick="go(3)">em e rem</button>
+    <button class="nav-btn" onclick="go(4)">%</button>
+    <button class="nav-btn" onclick="go(5)">Viewport</button>
+    <button class="nav-btn" onclick="go(6)">ch e ex</button>
+    <button class="nav-btn" onclick="go(7)">clamp()</button>
+    <button class="nav-btn" onclick="go(8)">Conversão</button>
+    <button class="nav-btn" onclick="go(9)">Comparativo</button>
+    <button class="nav-btn" onclick="go(10)">Quando usar</button>
+    <span class="counter" id="counter">1 / 11</span>
+  </nav>
+
+  <main>
+    <div class="wrap">
+
+      <!-- SLIDE 0 — CAPA -->
+      <div class="slide active" id="s0">
+        <div class="card cover">
+          <div class="cover-mark">
+            <svg width="28" height="28" viewBox="0 0 24 24">
+              <path d="M3 4h18v2H3V4zm0 4h12v2H3V8zm0 4h18v2H3v-2zm0 4h12v2H3v-2zm0 4h18v2H3v-2z" />
+            </svg>
+          </div>
+          <div class="cover-tag">Grupo 7 &middot; Design Digital</div>
+          <h1>Tipos de Medidas em CSS</h1>
+          <p>Unidades absolutas, relativas e de viewport — como cada uma funciona, quando usar e por que a escolha certa
+            muda tudo em um layout responsivo e acessível.</p>
+          <div class="cover-badges">
+            <span class="badge b-px">px</span><span class="badge b-em">em</span><span class="badge b-rem">rem</span>
+            <span class="badge b-pct">%</span><span class="badge b-vw">vw</span><span class="badge b-vh">vh</span>
+            <span class="badge b-vmin">vmin</span><span class="badge b-vmax">vmax</span>
+            <span class="badge b-ch">ch</span><span class="badge b-ex">ex</span>
+          </div>
+          <div class="cover-info">
+            <span><b>Disciplina:</b> Design Digital</span>
+            <div class="divider"></div>
+            <span><b>Turno:</b> Noturno</span>
+            <div class="divider"></div>
+            <span><b>Fatec Votorantim — 2026</b></span>
+          </div>
+        </div>
+        <div class="arrows">
+          <button class="arr" disabled>&#8592; Anterior</button>
+          <button class="arr" onclick="go(1)">Próximo &#8594;</button>
+        </div>
+      </div>
+
+      <!-- SLIDE 1 — DOIS GRUPOS -->
+      <div class="slide" id="s1">
+        <div class="card">
+          <div class="slide-no">Slide 2 — Conceito</div>
+          <div class="slide-title">Dois grandes grupos de unidades</div>
+          <div class="slide-sub">
+            Classificação do W3C. Fonte: <a href="https://www.w3.org/Style/Examples/007/units.pt_BR.html"
+              target="_blank">w3.org/Style/Examples/007/units.pt_BR.html</a>
+          </div>
+
+          <p>Segundo o W3C, as unidades absolutas significam em CSS o mesmo que em qualquer outro lugar — aparecem
+            exatamente do tamanho que são, dentro da precisão do hardware. Porém <strong>não são recomendadas para
+              tela</strong>, porque tamanhos de tela variam muito: uma tela grande pode ter 60cm, uma portátil talvez
+            8cm — e você não as olha da mesma distância.</p>
+
+          <div class="g2" style="margin:18px 0;">
+            <div class="ucard">
+              <span class="badge b-px">Absolutas</span>
+              <h4>Valor independente de contexto</h4>
+              <p>Não dependem do pai, do root nem da janela. O valor é sempre o mesmo — por isso são previsíveis mas
+                inflexíveis.</p>
+              <p style="margin-top:8px;">Na tela: <span class="badge b-px">px</span> &nbsp;|&nbsp; Impressão: <span
+                  class="badge" style="background:#f4f4f5;color:#52525b;">cm</span> <span class="badge"
+                  style="background:#f4f4f5;color:#52525b;">mm</span> <span class="badge"
+                  style="background:#f4f4f5;color:#52525b;">pt</span> <span class="badge"
+                  style="background:#f4f4f5;color:#52525b;">pc</span></p>
+            </div>
+            <div class="ucard">
+              <span class="badge b-rem">Relativas</span>
+              <h4>Valor proporcional a uma referência</h4>
+              <p>Dependem de outra coisa: o pai, o root do documento, o tamanho da janela, ou a própria fonte.
+                Essenciais para responsividade.</p>
+              <p style="margin-top:8px;"><span class="badge b-em">em</span> <span class="badge b-rem">rem</span> <span
+                  class="badge b-pct">%</span> <span class="badge b-vw">vw</span> <span class="badge b-vh">vh</span>
+                <span class="badge b-ch">ch</span></p>
+            </div>
+          </div>
+
+          <div class="box box-blue">
+            <strong>Recomendação do W3C para tela:</strong> use <code>em</code>, <code>px</code> e <code>%</code> —
+            evite <code>cm</code>, <code>mm</code>, <code>in</code>, <code>pt</code> e <code>pc</code> em folhas de
+            estilo para monitor. Para impressão, inverta: prefira <code>cm</code>, <code>pt</code>, e evite
+            <code>px</code>.
+          </div>
+
+          <div class="code">
+            <span class="code-tag">CSS</span><span class="cc">/* Absoluta — sempre 300px, não importa o contexto
+              */</span>
+            <span class="cs">.caixa</span> { <span class="cp">width</span>: <span class="cn">300</span><span
+              class="cu">px</span>; }
+
+            <span class="cc">/* Relativa ao pai */</span>
+            <span class="cs">.caixa</span> { <span class="cp">width</span>: <span class="cn">50</span><span
+              class="cu">%</span>; }
+
+            <span class="cc">/* Relativa ao root (elemento html) */</span>
+            <span class="cs">.caixa</span> { <span class="cp">font-size</span>: <span class="cn">1.5</span><span
+              class="cu">rem</span>; }
+
+            <span class="cc">/* Relativa à janela do navegador */</span>
+            <span class="cs">.hero</span> { <span class="cp">height</span>: <span class="cn">100</span><span
+              class="cu">vh</span>; }
+          </div>
+        </div>
+        <div class="arrows">
+          <button class="arr" onclick="go(0)">&#8592; Anterior</button>
+          <button class="arr" onclick="go(2)">Próximo &#8594;</button>
+        </div>
+      </div>
+
+      <!-- SLIDE 2 — ABSOLUTAS -->
+      <div class="slide" id="s2">
+        <div class="card">
+          <div class="slide-no">Slide 3 — Medidas absolutas</div>
+          <div class="slide-title">Unidades absolutas</div>
+          <div class="slide-sub">
+            Relação entre elas: <code
+              style="font-family:'JetBrains Mono',monospace;font-size:12px;">1in = 2,54cm = 25,4mm = 72pt = 6pc</code> —
+            Fonte: <a href="https://www.w3.org/Style/Examples/007/units.pt_BR.html" target="_blank">W3C</a>
+          </div>
+
+          <div class="tbl-wrap">
+            <table class="tbl">
+              <tr>
+                <th>Unidade</th>
+                <th>Nome</th>
+                <th>Equivalência</th>
+                <th>Recomendado para</th>
+              </tr>
+              <tr>
+                <td><span class="badge b-px">px</span></td>
+                <td>Pixel</td>
+                <td>1/96 polegada</td>
+                <td>Tela — bordas, ícones, imagens</td>
+              </tr>
+              <tr>
+                <td><code>cm</code></td>
+                <td>Centímetro</td>
+                <td>≈ 37,8px</td>
+                <td>Impressão</td>
+              </tr>
+              <tr>
+                <td><code>mm</code></td>
+                <td>Milímetro</td>
+                <td>≈ 3,78px</td>
+                <td>Impressão</td>
+              </tr>
+              <tr>
+                <td><code>in</code></td>
+                <td>Polegada</td>
+                <td>96px</td>
+                <td>Impressão</td>
+              </tr>
+              <tr>
+                <td><code>pt</code></td>
+                <td>Ponto tipográfico</td>
+                <td>1/72 polegada</td>
+                <td>Tipografia impressa</td>
+              </tr>
+              <tr>
+                <td><code>pc</code></td>
+                <td>Pica</td>
+                <td>12pt = 16px</td>
+                <td>Tipografia impressa</td>
+              </tr>
+            </table>
+          </div>
+
+          <p>O <span class="badge b-px">px</span> é chamado de "unidade mágica" pelo W3C. Não é relacionado à fonte nem
+            a medidas físicas exatas — é definido para ser <em>pequeno, mas visível</em>. Garante aparência consistente
+            entre dispositivos, o que o torna o mais seguro para tela. Imagens rasterizadas são exibidas por padrão com
+            mapeamento de 1px por pixel.</p>
+
+          <div class="box box-amber">
+            <strong>Acessibilidade:</strong> quando o usuário aumenta o tamanho padrão do texto no navegador, fontes
+            definidas em <code>px</code> não respondem. Para fontes, prefira sempre <code>rem</code>.
+          </div>
+
+          <div class="g2">
+            <div class="code" style="margin:0;">
+              <span class="code-tag">Bom uso de px</span><span class="cs">.card</span> {
+              <span class="cp">border</span>: <span class="cn">1</span><span class="cu">px</span> solid #ddd;
+              <span class="cp">border-radius</span>: <span class="cn">8</span><span class="cu">px</span>;
+              <span class="cp">box-shadow</span>: <span class="cn">0</span> <span class="cn">2</span><span
+                class="cu">px</span> <span class="cn">8</span><span class="cu">px</span> rgba(0,0,0,.1);
+              <span class="cp">outline</span>: <span class="cn">2</span><span class="cu">px</span> solid blue;
+              }
+              <span class="cc">/* px é ideal para valores que não
+                devem escalar com o texto */</span>
+            </div>
+            <div class="code" style="margin:0;">
+              <span class="code-tag">Fonte: px vs rem</span><span class="cs">body</span> {
+              <span class="cc">/* Ruim — ignora configuração do navegador */</span>
+              <span class="cp">font-size</span>: <span class="cn">16</span><span class="cu">px</span>;
+              }
+
+              <span class="cs">body</span> {
+              <span class="cc">/* Bom — respeita preferência do usuário */</span>
+              <span class="cp">font-size</span>: <span class="cn">1</span><span class="cu">rem</span>;
+              }
+            </div>
+          </div>
+        </div>
+        <div class="arrows">
+          <button class="arr" onclick="go(1)">&#8592; Anterior</button>
+          <button class="arr" onclick="go(3)">Próximo &#8594;</button>
+        </div>
+      </div>
+
+      <!-- SLIDE 3 — EM e REM -->
+      <div class="slide" id="s3">
+        <div class="card">
+          <div class="slide-no">Slide 4 — em e rem</div>
+          <div class="slide-title">As unidades relativas mais usadas</div>
+          <div class="slide-sub">
+            Segundo o MDN, <code>em</code> e <code>rem</code> são as unidades relativas que você encontrará com mais
+            frequência ao dimensionar textos e caixas. Fonte: <a
+              href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics/Values_and_units"
+              target="_blank">MDN Web Docs</a>
+          </div>
+
+          <div class="g2">
+            <div>
+              <h3><span class="badge b-em">em</span> — relativo ao pai</h3>
+              <p><code>em</code> é o tamanho de fonte do elemento atual. Em um elemento com fonte 20px,
+                <code>1em = 20px</code>. Quando usado para <code>font-size</code>, o pai é a referência; para outras
+                propriedades (<code>padding</code>, <code>margin</code>), o próprio elemento é a referência.</p>
+              <div class="box box-amber">
+                <strong>Cascateamento:</strong> cada filho herda e multiplica pelo pai. Com <code>1.2em</code> em cada
+                nível: 14px → 16,8px → 20,16px → 24,2px. O texto cresce sem parar.
+              </div>
+            </div>
+            <div>
+              <h3><span class="badge b-rem">rem</span> — relativo ao root</h3>
+              <p><code>rem</code> significa "root em" — sempre se refere ao <code>&lt;html&gt;</code>, não ao pai. O
+                valor de root é constante em todo o documento. O problema do cascateamento simplesmente não existe.</p>
+              <div class="box box-green">
+                <strong>Vantagem:</strong> alterar o <code>font-size</code> do <code>html</code> reescala tudo
+                proporcionalmente. Perfeito para acessibilidade e temas escaláveis.
+              </div>
+            </div>
+          </div>
+
+          <div class="g2" style="margin-top:8px;">
+            <div class="code" style="margin:0;">
+              <span class="code-tag">Problema com em</span><span class="cc">/* html: 16px padrão, pai: 14px */</span>
+              <span class="cs">.pai</span> { <span class="cp">font-size</span>: <span class="cn">14</span><span
+                class="cu">px</span>; }
+
+              <span class="cs">.filho</span> {
+              <span class="cp">font-size</span>: <span class="cn">1.2</span><span class="cu">em</span>; <span
+                class="cc">/* 14 × 1.2 = 16.8px */</span>
+              }
+              <span class="cs">.neto</span> {
+              <span class="cp">font-size</span>: <span class="cn">1.2</span><span class="cu">em</span>; <span
+                class="cc">/* 16.8 × 1.2 = 20.16px */</span>
+              }
+              <span class="cc">/* cascata acumulada! */</span>
+            </div>
+            <div class="code" style="margin:0;">
+              <span class="code-tag">Solução com rem</span><span class="cs">html</span> { <span
+                class="cp">font-size</span>: <span class="cn">16</span><span class="cu">px</span>; }
+
+              <span class="cs">h1</span> { <span class="cp">font-size</span>: <span class="cn">2</span><span
+                class="cu">rem</span>; } <span class="cc">/* 32px */</span>
+              <span class="cs">h2</span> { <span class="cp">font-size</span>: <span class="cn">1.5</span><span
+                class="cu">rem</span>; } <span class="cc">/* 24px */</span>
+              <span class="cs">p</span> { <span class="cp">font-size</span>: <span class="cn">1</span><span
+                class="cu">rem</span>; } <span class="cc">/* 16px */</span>
+              <span class="cs">small</span> { <span class="cp">font-size</span>: <span class="cn">.75</span><span
+                class="cu">rem</span>; } <span class="cc">/* 12px */</span>
+              <span class="cc">/* sempre relativo ao html */</span>
+            </div>
+          </div>
+
+          <div class="demo" style="margin-top:16px;">
+            <div class="demo-title">Demo — efeito cascata em vs rem</div>
+            <label>Root (html) font-size: <b id="rv">16</b>px</label>
+            <input type="range" min="10" max="30" value="16" oninput="setRoot(this.value)">
+            <label>Pai font-size: <b id="pv">20</b>px</label>
+            <input type="range" min="10" max="36" value="20" oninput="setPai(this.value)">
+            <label>Multiplicador (ex: 1.5em ou 1.5rem): <b id="mv">1.5</b>&times;</label>
+            <input type="range" min="0.5" max="3" step="0.1" value="1.5" oninput="setMult(this.value)">
+            <div class="g3" style="margin-top:4px;">
+              <div>
+                <div class="font-preview" id="d-px" style="font-size:24px;">Texto px</div>
+                <div class="fp-label">font-size: 24px (fixo)</div>
+              </div>
+              <div>
+                <div class="font-preview" id="d-em">Texto em</div>
+                <div class="fp-label" id="i-em"></div>
+              </div>
+              <div>
+                <div class="font-preview" id="d-rem">Texto rem</div>
+                <div class="fp-label" id="i-rem"></div>
+              </div>
+            </div>
+            <p style="font-size:12px;color:var(--soft);margin-top:8px;margin-bottom:0;">Mude o pai: o <code>em</code>
+              muda, o <code>rem</code> não. Mude o root: o <code>rem</code> muda, o <code>px</code> não.</p>
+          </div>
+        </div>
+        <div class="arrows">
+          <button class="arr" onclick="go(2)">&#8592; Anterior</button>
+          <button class="arr" onclick="go(4)">Próximo &#8594;</button>
+        </div>
+      </div>
+
+      <!-- SLIDE 4 — % -->
+      <div class="slide" id="s4">
+        <div class="card">
+          <div class="slide-no">Slide 5 — Porcentagem</div>
+          <div class="slide-title">A unidade %</div>
+          <div class="slide-sub">
+            Sempre relativa ao pai — mas o que é o "pai" muda conforme a propriedade. Fonte: <a
+              href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics/Values_and_units"
+              target="_blank">MDN Web Docs</a>
+          </div>
+
+          <p>Para <code>width</code> e <code>height</code>, a porcentagem é relativa à dimensão correspondente do pai.
+            Para <code>font-size</code>, é relativa à fonte do pai. Para <code>margin</code> e <code>padding</code> —
+            incluindo top e bottom — <strong>a referência é sempre a largura do pai</strong>. Isso surpreende muita
+            gente.</p>
+
+          <div class="g2">
+            <div class="code" style="margin:0;">
+              <span class="code-tag">Largura fluida</span><span class="cs">.pai</span> { <span class="cp">width</span>:
+              <span class="cn">800</span><span class="cu">px</span>; }
+
+              <span class="cs">.filho</span> { <span class="cp">width</span>: <span class="cn">50</span><span
+                class="cu">%</span>; } <span class="cc">/* = 400px */</span>
+              <span class="cs">.neto</span> { <span class="cp">width</span>: <span class="cn">50</span><span
+                class="cu">%</span>; } <span class="cc">/* = 200px */</span>
+
+              <span class="cc">/* padding-top em % usa a LARGURA do pai
+                — não a altura! */</span>
+              <span class="cs">.thumb</span> {
+              <span class="cp">width</span>: <span class="cn">100</span><span class="cu">%</span>;
+              <span class="cp">padding-top</span>: <span class="cn">56.25</span><span class="cu">%</span>; <span
+                class="cc">/* aspect ratio 16:9 */</span>
+              }
+            </div>
+            <div class="code" style="margin:0;">
+              <span class="code-tag">% vs vw — diferença chave</span><span class="cc">/* % — relativa ao PAI */</span>
+              <span class="cs">.filho</span> { <span class="cp">width</span>: <span class="cn">100</span><span
+                class="cu">%</span>; }
+              <span class="cc">/* = largura do elemento pai */</span>
+
+              <span class="cc">/* vw — relativa à VIEWPORT */</span>
+              <span class="cs">.filho</span> { <span class="cp">width</span>: <span class="cn">100</span><span
+                class="cu">vw</span>; }
+              <span class="cc">/* = largura da janela inteira */</span>
+
+              <span class="cc">/* Os dois podem ser diferentes
+                se o pai tiver padding/margin */</span>
+            </div>
+          </div>
+
+          <div class="box box-blue" style="margin-top:8px;">
+            <strong>Por que height: 50% às vezes não funciona?</strong> Se o pai não tem altura definida, o navegador
+            não sabe calcular 50% de quê — o resultado é 0. O pai precisa de <code>height</code> explícito ou ser
+            <code>100vh</code>.
+          </div>
+
+          <div class="demo">
+            <div class="demo-title">Demo — largura em porcentagem</div>
+            <label>Container pai: <b id="pai-size">600</b>px</label>
+            <input type="range" min="200" max="780" value="600" oninput="setPaiW(this.value)">
+            <label>Filho: <b id="filho-pct">60</b>%</label>
+            <input type="range" min="10" max="100" value="60" oninput="setFilhoPct(this.value)">
+            <div id="pai-box"
+              style="background:#f1f5f9;border-radius:6px;padding:10px;width:600px;max-width:100%;transition:width .08s;">
+              <div class="bar" id="filho-box" style="width:60%;">60% = <span id="px-result">360</span>px</div>
+            </div>
+            <p style="font-size:12px;color:var(--soft);margin-top:6px;margin-bottom:0;">O resultado em px muda conforme
+              o pai muda — mesmo com o filho sempre em 60%.</p>
+          </div>
+        </div>
+        <div class="arrows">
+          <button class="arr" onclick="go(3)">&#8592; Anterior</button>
+          <button class="arr" onclick="go(5)">Próximo &#8594;</button>
+        </div>
+      </div>
+
+      <!-- SLIDE 5 — VIEWPORT -->
+      <div class="slide" id="s5">
+        <div class="card">
+          <div class="slide-no">Slide 6 — Viewport</div>
+          <div class="slide-title">vw, vh, vmin e vmax</div>
+          <div class="slide-sub">
+            Relativas ao tamanho da janela do navegador — não ao elemento pai. Fonte: <a
+              href="https://desenvolvimentoparaweb.com/css/unidades-css-rem-vh-vw-vmin-vmax-ex-ch/"
+              target="_blank">desenvolvimentoparaweb.com</a>
+          </div>
+
+          <p><code>vw</code> e <code>vh</code> são relativas à viewport — a área visível da janela. <strong>1vw = 1/100
+              da largura</strong>; <strong>1vh = 1/100 da altura</strong>. Se a viewport tem 900px de altura, 1vh = 9px.
+            Se tem 750px de largura, 1vw = 7,5px.</p>
+
+          <p><code>vmin</code> e <code>vmax</code> combinam os dois: <code>vmin</code> usa o menor valor entre vw e vh,
+            e <code>vmax</code> usa o maior. Para uma viewport de 1100×700px: 1vmin = 7px e 1vmax = 11px.</p>
+
+          <div class="tbl-wrap">
+            <table class="tbl">
+              <tr>
+                <th>Unidade</th>
+                <th>Referência</th>
+                <th>Exemplo concreto (viewport 1100×700)</th>
+              </tr>
+              <tr>
+                <td><span class="badge b-vw">vw</span></td>
+                <td>1% da largura da viewport</td>
+                <td>1vw = 11px</td>
+              </tr>
+              <tr>
+                <td><span class="badge b-vh">vh</span></td>
+                <td>1% da altura da viewport</td>
+                <td>1vh = 7px</td>
+              </tr>
+              <tr>
+                <td><span class="badge b-vmin">vmin</span></td>
+                <td>1% do menor (vh = 700)</td>
+                <td>1vmin = 7px</td>
+              </tr>
+              <tr>
+                <td><span class="badge b-vmax">vmax</span></td>
+                <td>1% do maior (vw = 1100)</td>
+                <td>1vmax = 11px</td>
+              </tr>
+            </table>
+          </div>
+
+          <div class="g2" style="margin-top:4px;">
+            <div class="code" style="margin:0;">
+              <span class="code-tag">Usos clássicos</span><span class="cc">/* Seção que ocupa a janela inteira */</span>
+              <span class="cs">.hero</span> { <span class="cp">min-height</span>: <span class="cn">100</span><span
+                class="cu">vh</span>; }
+
+              <span class="cc">/* Elemento quadrado sempre visível */</span>
+              <span class="cs">.square</span> {
+              <span class="cp">width</span>: <span class="cn">80</span><span class="cu">vmin</span>;
+              <span class="cp">height</span>: <span class="cn">80</span><span class="cu">vmin</span>;
+              }
+
+              <span class="cc">/* Título que escala com a tela */</span>
+              <span class="cs">h1</span> { <span class="cp">font-size</span>: <span class="cn">5</span><span
+                class="cu">vw</span>; }
+            </div>
+            <div class="code" style="margin:0;">
+              <span class="code-tag">Problema no mobile</span><span class="cc">/* vh tem comportamento inconsistente
+                em iOS e Android: as barras do
+                navegador mudam a altura real */</span>
+
+              <span class="cc">/* Novas unidades CSS (suporte moderno) */</span>
+              <span class="cs">.hero</span> {
+              <span class="cc">/* svh = smaller viewport height */</span>
+              <span class="cc">/* (com barras visíveis) */</span>
+              <span class="cp">min-height</span>: <span class="cn">100</span><span class="cu">svh</span>;
+
+              <span class="cc">/* dvh = dynamic (muda ao rolar) */</span>
+              <span class="cp">min-height</span>: <span class="cn">100</span><span class="cu">dvh</span>;
+              }
+            </div>
+          </div>
+
+          <div class="demo" style="margin-top:14px;">
+            <div class="demo-title">Demo — simule vw e vh</div>
+            <div class="g2">
+              <div>
+                <label>Valor em vw: <b id="vw-pct">40</b>vw &nbsp;(viewport simulada: 800px)</label>
+                <input type="range" min="5" max="100" value="40" oninput="setVW(this.value)">
+                <div style="background:#f1f5f9;border-radius:6px;padding:8px;">
+                  <div class="bar" id="vw-bar" style="width:40%;">
+                    <span id="vw-label">40vw = 320px</span>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <label>Valor em vh: <b id="vh-pct">50</b>vh &nbsp;(viewport simulada: 600px)</label>
+                <input type="range" min="10" max="100" value="50" oninput="setVH(this.value)">
+                <div style="display:flex;gap:10px;align-items:flex-end;">
+                  <div id="vh-bar"
+                    style="width:70px;height:90px;background:#7c3aed;border-radius:5px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-family:'JetBrains Mono',monospace;text-align:center;transition:height .08s;padding:4px;">
+                    <span id="vh-label">50vh = 300px</span>
+                  </div>
+                  <span style="font-size:12px;color:var(--soft);">Altura cresce conforme o vh aumenta</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="arrows">
+          <button class="arr" onclick="go(4)">&#8592; Anterior</button>
+          <button class="arr" onclick="go(6)">Próximo &#8594;</button>
+        </div>
+      </div>
+
+      <!-- SLIDE 6 — ch e ex -->
+      <div class="slide" id="s6">
+        <div class="card">
+          <div class="slide-no">Slide 7 — ch e ex</div>
+          <div class="slide-title">Unidades tipográficas: ch e ex</div>
+          <div class="slide-sub">
+            Dependem da família de fonte, não apenas do tamanho. Fonte: <a
+              href="https://desenvolvimentoparaweb.com/css/unidades-css-rem-vh-vw-vmin-vmax-ex-ch/"
+              target="_blank">desenvolvimentoparaweb.com</a>
+          </div>
+
+          <div class="g2">
+            <div class="ucard">
+              <span class="badge b-ch">ch</span>
+              <h4>Largura do caractere "0"</h4>
+              <p>Definida como a <em>advance measure</em> (medida de avanço) da largura do caractere
+                <strong>"0"</strong> na fonte atual. Em fontes monoespaçadas, <code>width: 40ch</code> garante
+                exatamente 40 caracteres na linha.</p>
+              <p style="margin-top:8px;">O uso mais comum é definir <code>max-width</code> de parágrafos: textos com
+                60–75 caracteres por linha são considerados ideais para leitura. Com <code>max-width: 65ch</code>, isso
+                se ajusta automaticamente a qualquer tamanho de fonte.</p>
+            </div>
+            <div class="ucard">
+              <span class="badge b-ex">ex</span>
+              <h4>Altura da letra "x" minúscula</h4>
+              <p>Definida como a <em>x-height</em> — altura da letra <strong>"x"</strong> minúscula na fonte atual.
+                Fontes com o mesmo <code>em</code> podem ter <code>ex</code> muito diferente, pois cada família tem
+                proporções próprias.</p>
+              <p style="margin-top:8px;">É raramente usada no dia a dia, mas útil para alinhar ícones inline com o texto
+                de forma tipograficamente precisa — o ícone fica na altura exata das letras minúsculas.</p>
+            </div>
+          </div>
+
+          <div class="code" style="margin-top:14px;">
+            <span class="code-tag">Usos práticos de ch</span><span class="cc">/* Largura de leitura ideal em artigos
+              */</span>
+            <span class="cs">article p</span> {
+            <span class="cp">max-width</span>: <span class="cn">65</span><span class="cu">ch</span>; <span class="cc">/*
+              ~65 caracteres por linha */</span>
+            <span class="cp">line-height</span>: <span class="cn">1.65</span>;
+            }
+
+            <span class="cc">/* Input que cabe exatamente um CEP */</span>
+            <span class="cs">input.cep</span> { <span class="cp">width</span>: <span class="cn">9</span><span
+              class="cu">ch</span>; } <span class="cc">/* "00000-000" = 9 chars */</span>
+
+            <span class="cc">/* Input que cabe um CPF */</span>
+            <span class="cs">input.cpf</span> { <span class="cp">width</span>: <span class="cn">14</span><span
+              class="cu">ch</span>; } <span class="cc">/* "000.000.000-00" = 14 chars */</span>
+
+            <span class="cc">/* Gap no tamanho de um espaço */</span>
+            <span class="cs">.inline-tags</span> { <span class="cp">gap</span>: <span class="cn">1</span><span
+              class="cu">ch</span>; }
+          </div>
+
+          <div class="demo" style="margin-top:14px;">
+            <div class="demo-title">Demo — max-width com ch</div>
+            <label>max-width: <b id="ch-val">65</b>ch</label>
+            <input type="range" min="20" max="100" value="65" oninput="setCH(this.value)">
+            <label>font-size: <b id="ch-fs">16</b>px</label>
+            <input type="range" min="12" max="28" value="16" oninput="setCHFS(this.value)" style="margin-top:0;">
+            <div style="background:#f8f8f8;border-radius:6px;padding:10px;">
+              <div id="ch-box"
+                style="max-width:65ch;font-size:16px;line-height:1.65;background:white;border:1px solid var(--border);border-radius:5px;padding:14px;">
+                Este parágrafo tem <code>max-width</code> em <code>ch</code>. Ao aumentar a fonte, a caixa também fica
+                mais larga — porque <code>ch</code> é proporcional ao caractere da fonte. A largura ideal de leitura
+                acompanha o texto automaticamente.
+              </div>
+            </div>
+            <p style="font-size:12px;color:var(--soft);margin-top:6px;margin-bottom:0;">Perceba: diferente de
+              <code>px</code>, o limite em <code>ch</code> cresce quando o texto cresce.</p>
+          </div>
+        </div>
+        <div class="arrows">
+          <button class="arr" onclick="go(5)">&#8592; Anterior</button>
+          <button class="arr" onclick="go(7)">Próximo &#8594;</button>
+        </div>
+      </div>
+
+      <!-- SLIDE 7 — CLAMP -->
+      <div class="slide" id="s7">
+        <div class="card">
+          <div class="slide-no">Slide 8 — Tipografia fluida</div>
+          <div class="slide-title">clamp() — unidades combinadas</div>
+          <div class="slide-sub">
+            A técnica moderna de tipografia fluida que elimina a necessidade de media queries para fontes. Fonte: <a
+              href="https://developer.mozilla.org/en-US/docs/Web/CSS/length" target="_blank">MDN — CSS length</a>
+          </div>
+
+          <p>A função <code>clamp(mínimo, ideal, máximo)</code> restringe um valor entre um mínimo e máximo, mas o deixa
+            variar de forma fluida entre eles. Combinada com <code>vw</code>, cria fontes que escalam automaticamente
+            com a largura da tela — sem nenhuma media query.</p>
+
+          <div class="code">
+            <span class="code-tag">Tipografia fluida com clamp</span><span class="cc">/* Abordagem antiga: media queries
+              para cada breakpoint */</span>
+            <span class="cs">h1</span> { <span class="cp">font-size</span>: <span class="cn">1.75</span><span
+              class="cu">rem</span>; }
+            <span class="cc">@media (min-width: 768px) { h1 { font-size: 2.5rem; } }</span>
+            <span class="cc">@media (min-width: 1200px) { h1 { font-size: 3rem; } }</span>
+
+            <span class="cc">/* Abordagem moderna: uma linha só */</span>
+            <span class="cs">h1</span> {
+            <span class="cc">/* min: 1.75rem | ideal: 4vw | max: 3rem */</span>
+            <span class="cp">font-size</span>: <span class="cv">clamp</span>(<span class="cn">1.75</span><span
+              class="cu">rem</span>, <span class="cn">4</span><span class="cu">vw</span>, <span class="cn">3</span><span
+              class="cu">rem</span>);
+            }
+
+            <span class="cs">p</span> {
+            <span class="cp">font-size</span>: <span class="cv">clamp</span>(<span class="cn">0.9</span><span
+              class="cu">rem</span>, <span class="cn">2.5</span><span class="cu">vw</span>, <span
+              class="cn">1.2</span><span class="cu">rem</span>);
+            <span class="cp">max-width</span>: <span class="cn">65</span><span class="cu">ch</span>;
+            }
+          </div>
+
+          <div class="demo" style="margin-top:14px;">
+            <div class="demo-title">Demo — simule a largura da viewport</div>
+            <label>Largura simulada da viewport: <b id="clamp-vp">800</b>px</label>
+            <input type="range" min="320" max="1400" value="800" oninput="setClamp(this.value)">
+
+            <div style="margin-top:10px;display:flex;flex-direction:column;gap:14px;">
+              <div>
+                <p style="font-size:12px;color:var(--muted);margin-bottom:5px;"><code>h1</code> →
+                  <code>clamp(28px, 4vw, 48px)</code></p>
+                <div id="clamp-box"
+                  style="font-size:32px;font-weight:700;font-family:'IBM Plex Sans',sans-serif;transition:font-size .08s;background:white;border:1px solid var(--border);border-radius:6px;padding:12px 16px;">
+                  Título fluido
+                </div>
+                <div style="font-size:11px;color:var(--soft);margin-top:4px;font-family:'JetBrains Mono',monospace;"
+                  id="clamp-info"></div>
+              </div>
+              <div>
+                <p style="font-size:12px;color:var(--muted);margin-bottom:5px;"><code>p</code> →
+                  <code>clamp(14px, 2.5vw, 19px)</code></p>
+                <div id="clamp-p"
+                  style="font-size:16px;max-width:65ch;line-height:1.65;transition:font-size .08s;background:white;border:1px solid var(--border);border-radius:6px;padding:12px 16px;">
+                  Parágrafo com fonte fluida e <code>max-width: 65ch</code>. A fonte cresce até o máximo e para — nunca
+                  ultrapassa.
+                </div>
+                <div style="font-size:11px;color:var(--soft);margin-top:4px;font-family:'JetBrains Mono',monospace;"
+                  id="clamp-p-info"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="arrows">
+          <button class="arr" onclick="go(6)">&#8592; Anterior</button>
+          <button class="arr" onclick="go(8)">Próximo &#8594;</button>
+        </div>
+      </div>
+
+      <!-- SLIDE 8 — CONVERSÃO -->
+      <div class="slide" id="s8">
+        <div class="card">
+          <div class="slide-no">Slide 9 — Conversão</div>
+          <div class="slide-title">px → rem: tabela e calculadora</div>
+          <div class="slide-sub">
+            Fórmula: <code
+              style="font-family:'JetBrains Mono',monospace;font-size:12px;">rem = px ÷ root-font-size</code>
+            &nbsp;|&nbsp; Fonte: <a href="https://www.w3schools.com/tags/ref_pxtoemconversion.asp"
+              target="_blank">W3Schools — px to em conversion</a>
+          </div>
+
+          <div class="g2">
+            <div>
+              <table class="tbl">
+                <tr>
+                  <th>px</th>
+                  <th>rem (root 16px)</th>
+                  <th>em (pai 16px)</th>
+                </tr>
+                <tr>
+                  <td>10px</td>
+                  <td>0.625rem</td>
+                  <td>0.625em</td>
+                </tr>
+                <tr>
+                  <td>12px</td>
+                  <td>0.75rem</td>
+                  <td>0.75em</td>
+                </tr>
+                <tr>
+                  <td>14px</td>
+                  <td>0.875rem</td>
+                  <td>0.875em</td>
+                </tr>
+                <tr>
+                  <td>16px</td>
+                  <td>1rem</td>
+                  <td>1em</td>
+                </tr>
+                <tr>
+                  <td>18px</td>
+                  <td>1.125rem</td>
+                  <td>1.125em</td>
+                </tr>
+                <tr>
+                  <td>20px</td>
+                  <td>1.25rem</td>
+                  <td>1.25em</td>
+                </tr>
+                <tr>
+                  <td>24px</td>
+                  <td>1.5rem</td>
+                  <td>1.5em</td>
+                </tr>
+                <tr>
+                  <td>32px</td>
+                  <td>2rem</td>
+                  <td>2em</td>
+                </tr>
+                <tr>
+                  <td>48px</td>
+                  <td>3rem</td>
+                  <td>3em</td>
+                </tr>
+                <tr>
+                  <td>64px</td>
+                  <td>4rem</td>
+                  <td>4em</td>
+                </tr>
+              </table>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:12px;">
+              <div class="code" style="margin:0;">
+                <span class="code-tag">Truque 62.5%</span><span class="cs">html</span> { <span
+                  class="cp">font-size</span>: <span class="cn">62.5</span><span class="cu">%</span>; }
+                <span class="cc">/* 62.5% de 16px = 10px */</span>
+                <span class="cc">/* agora: 1rem = 10px */</span>
+
+                <span class="cs">body</span> {
+                <span class="cc">/* redefine para 16px de novo */</span>
+                <span class="cp">font-size</span>: <span class="cn">1.6</span><span class="cu">rem</span>;
+                }
+
+                <span class="cc">/* cálculo mental muito mais fácil */</span>
+                <span class="cs">h1</span> { <span class="cp">font-size</span>: <span class="cn">3.2</span><span
+                  class="cu">rem</span>; } <span class="cc">/* = 32px */</span>
+                <span class="cs">p</span> { <span class="cp">font-size</span>: <span class="cn">1.6</span><span
+                  class="cu">rem</span>; } <span class="cc">/* = 16px */</span>
+              </div>
+              <div class="box box-amber" style="margin:0;">
+                <strong>Atenção:</strong> ao usar o truque do 62.5%, sempre redefina o body para <code>1.6rem</code>.
+                Elementos herdados e plugins externos podem ter o texto minúsculo se você esquecer.
+              </div>
+            </div>
+          </div>
+
+          <div class="demo" style="margin-top:16px;">
+            <div class="demo-title">Calculadora px &harr; rem</div>
+            <div class="g3">
+              <div>
+                <label>Root font-size (html)</label>
+                <input type="number" id="calc-root" value="16" min="8" max="32" oninput="calcConvert()">
+              </div>
+              <div>
+                <label>Valor em px</label>
+                <input type="number" id="calc-px" value="24" min="1" oninput="calcConvert()">
+              </div>
+              <div>
+                <label>Resultado em rem</label>
+                <div id="calc-result"
+                  style="padding:7px 10px;background:var(--accent-bg);border:1px solid #bfdbfe;border-radius:6px;font-family:'JetBrains Mono',monospace;font-size:14px;color:var(--accent);font-weight:600;">
+                  1.5rem
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="arrows">
+          <button class="arr" onclick="go(7)">&#8592; Anterior</button>
+          <button class="arr" onclick="go(9)">Próximo &#8594;</button>
+        </div>
+      </div>
+
+      <!-- SLIDE 9 — COMPARATIVO -->
+      <div class="slide" id="s9">
+        <div class="card">
+          <div class="slide-no">Slide 10 — Comparativo</div>
+          <div class="slide-title">Comparativo entre todas as unidades</div>
+          <div class="slide-sub">
+            Responsividade, acessibilidade e referência de cada unidade, lado a lado.
+          </div>
+
+          <div style="border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-bottom:16px;">
+            <div class="cmp-head">
+              <div>Unidade</div>
+              <div>Responsiva</div>
+              <div>Zoom do navegador</div>
+              <div>Referência</div>
+              <div>Uso principal</div>
+            </div>
+            <div class="cmp-row">
+              <div><span class="badge b-px">px</span></div>
+              <div><span class="no">Não</span></div>
+              <div><span class="no">Não respeita</span></div>
+              <div>Absoluta (tela)</div>
+              <div>Bordas, ícones, imagens</div>
+            </div>
+            <div class="cmp-row">
+              <div><span class="badge b-pct">%</span></div>
+              <div><span class="ok">Sim</span></div>
+              <div><span class="par">Parcial</span></div>
+              <div>Pai (dimensão)</div>
+              <div>Larguras de layout</div>
+            </div>
+            <div class="cmp-row">
+              <div><span class="badge b-em">em</span></div>
+              <div><span class="ok">Sim</span></div>
+              <div><span class="ok">Respeita</span></div>
+              <div>Pai (fonte)</div>
+              <div>Padding em componentes</div>
+            </div>
+            <div class="cmp-row">
+              <div><span class="badge b-rem">rem</span></div>
+              <div><span class="ok">Sim</span></div>
+              <div><span class="ok">Respeita</span></div>
+              <div>Root (html)</div>
+              <div>Fontes e espaçamentos</div>
+            </div>
+            <div class="cmp-row">
+              <div><span class="badge b-vw">vw</span></div>
+              <div><span class="ok">Sim</span></div>
+              <div><span class="no">Não respeita</span></div>
+              <div>Viewport (largura)</div>
+              <div>Tipografia fluida, larguras</div>
+            </div>
+            <div class="cmp-row">
+              <div><span class="badge b-vh">vh</span></div>
+              <div><span class="ok">Sim</span></div>
+              <div><span class="no">Não respeita</span></div>
+              <div>Viewport (altura)</div>
+              <div>Hero sections, modais</div>
+            </div>
+            <div class="cmp-row">
+              <div><span class="badge b-vmin">vmin</span></div>
+              <div><span class="ok">Sim</span></div>
+              <div><span class="no">Não respeita</span></div>
+              <div>Menor dimensão</div>
+              <div>Elementos quadrados responsivos</div>
+            </div>
+            <div class="cmp-row">
+              <div><span class="badge b-ch">ch</span></div>
+              <div><span class="ok">Sim</span></div>
+              <div><span class="ok">Respeita</span></div>
+              <div>Fonte (glifo "0")</div>
+              <div>max-width de texto</div>
+            </div>
+            <div class="cmp-row">
+              <div><span class="badge b-ex">ex</span></div>
+              <div><span class="ok">Sim</span></div>
+              <div><span class="ok">Respeita</span></div>
+              <div>Fonte (x-height)</div>
+              <div>Alinhamento de ícones</div>
+            </div>
+          </div>
+
+          <div class="box box-blue">
+            <strong>% vs vw — a diferença que mais confunde:</strong> <code>%</code> é relativa ao pai. Se o pai tem
+            600px e o elemento tem containers com padding, <code>100%</code> pode ser menos que a largura da tela.
+            <code>vw</code> é sempre relativa à janela — ignora completamente a hierarquia de elementos.
+          </div>
+
+          <div class="box box-green">
+            <strong>em vs rem — qual escolher?</strong> Use <code>rem</code> para fontes e espaçamentos globais — é
+            previsível. Use <code>em</code> para padding/gap dentro de componentes — o componente inteiro escala
+            proporcionalmente à sua própria fonte.
+          </div>
+        </div>
+        <div class="arrows">
+          <button class="arr" onclick="go(8)">&#8592; Anterior</button>
+          <button class="arr" onclick="go(10)">Próximo &#8594;</button>
+        </div>
+      </div>
+
+      <!-- SLIDE 10 — QUANDO USAR -->
+      <div class="slide" id="s10">
+        <div class="card">
+          <div class="slide-no">Slide 11 — Boas práticas</div>
+          <div class="slide-title">Quando usar cada unidade</div>
+          <div class="slide-sub">
+            Guia de decisão baseado nas recomendações do W3C, MDN Web Docs, W3Schools e desenvolvimentoparaweb.com.
+          </div>
+
+          <div class="g3">
+            <div class="ucard">
+              <span class="badge b-px">px</span>
+              <h4>Valores fixos e precisos</h4>
+              <p>Bordas, outline, box-shadow, border-radius. Alinhamento pixel-perfect de imagens com texto. Tamanho
+                fixo de ícones SVG.</p>
+            </div>
+            <div class="ucard">
+              <span class="badge b-rem">rem</span>
+              <h4>Fontes e espaçamentos globais</h4>
+              <p>Tamanho de fonte de toda a aplicação. Margens e paddings de elementos de conteúdo. max-width de
+                containers.</p>
+            </div>
+            <div class="ucard">
+              <span class="badge b-em">em</span>
+              <h4>Contexto interno de componente</h4>
+              <p>Padding e gap de botões, badges, cards. O componente inteiro escala ao mudar apenas a font-size dele.
+              </p>
+            </div>
+            <div class="ucard">
+              <span class="badge b-pct">%</span>
+              <h4>Larguras de layout</h4>
+              <p>Colunas em grids e flexbox. Largura de imagens dentro do container. Padding-top para aspect ratio
+                legado.</p>
+            </div>
+            <div class="ucard">
+              <span class="badge b-vw">vw / <span class="badge b-vh" style="display:inline-block">vh</span></span>
+              <h4>Dimensões relativas à janela</h4>
+              <p>Hero sections (min-height: 100svh). Tipografia fluida com clamp(). Modais e overlays de tela cheia.</p>
+            </div>
+            <div class="ucard">
+              <span class="badge b-ch">ch</span>
+              <h4>Largura de leitura ideal</h4>
+              <p>max-width: 65ch em artigos e parágrafos. Inputs com tamanho exato para um número de caracteres.</p>
+            </div>
+          </div>
+
+          <div class="code" style="margin-top:18px;">
+            <span class="code-tag">Sistema completo usando todas as unidades</span><span class="cs">html</span> { <span
+              class="cp">font-size</span>: <span class="cn">16</span><span class="cu">px</span>; } <span class="cc">/*
+              root — base para rem */</span>
+
+            <span class="cs">.layout</span> {
+            <span class="cp">max-width</span>: <span class="cn">75</span><span class="cu">rem</span>; <span
+              class="cc">/* container: 1200px */</span>
+            <span class="cp">padding</span>: <span class="cn">0</span> <span class="cn">5</span><span
+              class="cu">%</span>; <span class="cc">/* margens fluidas */</span>
+            }
+
+            <span class="cs">.hero</span> {
+            <span class="cp">min-height</span>: <span class="cn">100</span><span class="cu">svh</span>; <span
+              class="cc">/* altura da janela, mobile-safe */</span>
+            <span class="cp">padding</span>: <span class="cn">4</span><span class="cu">rem</span> <span
+              class="cn">0</span>;
+            }
+
+            <span class="cs">h1</span> { <span class="cp">font-size</span>: <span class="cv">clamp</span>(<span
+              class="cn">1.75</span><span class="cu">rem</span>, <span class="cn">4</span><span class="cu">vw</span>,
+            <span class="cn">3</span><span class="cu">rem</span>); }
+            <span class="cs">p</span> { <span class="cp">max-width</span>: <span class="cn">65</span><span
+              class="cu">ch</span>; <span class="cp">line-height</span>: <span class="cn">1.65</span>; }
+
+            <span class="cs">.btn</span> {
+            <span class="cp">padding</span>: <span class="cn">.7</span><span class="cu">em</span> <span
+              class="cn">1.5</span><span class="cu">em</span>; <span class="cc">/* escala com a fonte do botão */</span>
+            <span class="cp">border</span>: <span class="cn">1</span><span class="cu">px</span> solid currentColor;
+            <span class="cc">/* borda sempre nítida */</span>
+            <span class="cp">border-radius</span>: <span class="cn">6</span><span class="cu">px</span>;
+            }
+          </div>
+
+          <div
+            style="margin-top:20px;padding-top:18px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;font-size:12.5px;color:var(--muted);flex-wrap:wrap;gap:8px;">
+            <span>Fontes: w3.org, MDN Web Docs, W3Schools, desenvolvimentoparaweb.com</span>
+            <span><strong style="color:var(--ink);">Grupo 7</strong> &middot; Design Digital &middot; Fatec Votorantim
+              &middot; 2026</span>
+          </div>
+        </div>
+        <div class="arrows">
+          <button class="arr" onclick="go(9)">&#8592; Anterior</button>
+          <button class="arr" disabled>Fim &#8594;</button>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <script>
+    // NAVEGAÇÃO
+    const TOTAL = 11;
+    let cur = 0;
+    const btns = document.querySelectorAll('.nav-btn');
+    const mobBtns = document.querySelectorAll('.mob-nav-btn');
+
+    function go(n) {
+      document.getElementById('s' + cur).classList.remove('active');
+      btns[cur].classList.remove('active');
+      mobBtns[cur].classList.remove('active');
+      cur = n;
+      document.getElementById('s' + cur).classList.add('active');
+      btns[cur].classList.add('active');
+      mobBtns[cur].classList.add('active');
+      document.getElementById('counter').textContent = (n + 1) + ' / ' + TOTAL;
+      document.getElementById('mob-slide-info').textContent = (n + 1) + ' / ' + TOTAL;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function goMob(n) {
+      go(n);
+      closeDrawer();
+    }
+
+    let drawerOpen = false;
+    function toggleDrawer() {
+      drawerOpen = !drawerOpen;
+      document.getElementById('mob-drawer').classList.toggle('open', drawerOpen);
+    }
+    function closeDrawer() {
+      drawerOpen = false;
+      document.getElementById('mob-drawer').classList.remove('open');
+    }
+
+    // SLIDE 3: em vs rem
+    let rootV = 16, paiV = 20, multV = 1.5;
+    function setRoot(v) { rootV = +v; document.getElementById('rv').textContent = v; refreshEm(); }
+    function setPai(v) { paiV = +v; document.getElementById('pv').textContent = v; refreshEm(); }
+    function setMult(v) { multV = +v; document.getElementById('mv').textContent = v; refreshEm(); }
+    function refreshEm() {
+      const em = paiV * multV, re = rootV * multV;
+      document.getElementById('d-em').style.fontSize = em + 'px';
+      document.getElementById('d-rem').style.fontSize = re + 'px';
+      document.getElementById('i-em').textContent = multV + 'em × ' + paiV + 'px (pai) = ' + em.toFixed(1) + 'px';
+      document.getElementById('i-rem').textContent = multV + 'rem × ' + rootV + 'px (root) = ' + re.toFixed(1) + 'px';
+    }
+    refreshEm();
+
+    // SLIDE 4: porcentagem
+    let paiWV = 600, filhoPctV = 60;
+    function setPaiW(v) { paiWV = +v; document.getElementById('pai-size').textContent = v; document.getElementById('pai-box').style.width = Math.min(v, 780) + 'px'; updateFilho(); }
+    function setFilhoPct(v) { filhoPctV = +v; document.getElementById('filho-pct').textContent = v; updateFilho(); }
+    function updateFilho() {
+      const px = Math.round(paiWV * filhoPctV / 100);
+      document.getElementById('filho-box').style.width = filhoPctV + '%';
+      document.getElementById('filho-box').textContent = filhoPctV + '% = ' + px + 'px';
+      document.getElementById('px-result').textContent = px;
+    }
+
+    // SLIDE 5: vw/vh
+    function setVW(v) {
+      v = +v;
+      document.getElementById('vw-pct').textContent = v;
+      document.getElementById('vw-bar').style.width = v + '%';
+      const px = Math.round(800 * v / 100);
+      document.getElementById('vw-label').textContent = v + 'vw = ' + px + 'px';
+    }
+    function setVH(v) {
+      v = +v;
+      document.getElementById('vh-pct').textContent = v;
+      const px = Math.round(600 * v / 100);
+      const h = Math.max(30, Math.min(v * 1.8, 200));
+      document.getElementById('vh-bar').style.height = h + 'px';
+      document.getElementById('vh-label').textContent = v + 'vh = ' + px + 'px';
+    }
+
+    // SLIDE 6: ch
+    function setCH(v) { document.getElementById('ch-val').textContent = v; document.getElementById('ch-box').style.maxWidth = v + 'ch'; }
+    function setCHFS(v) { document.getElementById('ch-fs').textContent = v; document.getElementById('ch-box').style.fontSize = v + 'px'; }
+
+    // SLIDE 7: clamp
+    function setClamp(v) {
+      v = +v;
+      document.getElementById('clamp-vp').textContent = v;
+      const r1 = v * 0.04, c1 = Math.min(48, Math.max(28, r1));
+      document.getElementById('clamp-box').style.fontSize = c1 + 'px';
+      let i1;
+      if (r1 < 28) i1 = '4vw de ' + v + 'px = ' + r1.toFixed(1) + 'px → abaixo do mínimo, usa 28px';
+      else if (r1 > 48) i1 = '4vw de ' + v + 'px = ' + r1.toFixed(1) + 'px → acima do máximo, usa 48px';
+      else i1 = '4vw de ' + v + 'px = ' + r1.toFixed(1) + 'px → valor fluido dentro do intervalo';
+      document.getElementById('clamp-info').textContent = i1;
+
+      const r2 = v * 0.025, c2 = Math.min(19, Math.max(14, r2));
+      document.getElementById('clamp-p').style.fontSize = c2 + 'px';
+      let i2;
+      if (r2 < 14) i2 = '2.5vw = ' + r2.toFixed(1) + 'px → mínimo de 14px';
+      else if (r2 > 19) i2 = '2.5vw = ' + r2.toFixed(1) + 'px → máximo de 19px';
+      else i2 = '2.5vw = ' + r2.toFixed(1) + 'px → valor fluido';
+      document.getElementById('clamp-p-info').textContent = i2;
+    }
+    setClamp(800);
+
+    // SLIDE 8: calculadora
+    function calcConvert() {
+      const root = +document.getElementById('calc-root').value || 16;
+      const px = +document.getElementById('calc-px').value || 0;
+      const rem = (px / root);
+      const str = parseFloat(rem.toFixed(4)) + 'rem';
+      document.getElementById('calc-result').textContent = str;
+    }
+  </script>
+</body>
+
+</html>
