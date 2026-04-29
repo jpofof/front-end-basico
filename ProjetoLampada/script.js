@@ -37,4 +37,17 @@ function paraPiscar() {
     clearInterval(piscar);
 
 
+    
+}
+function paraAumentar(){
+    let tamanhoAtual = lampada.width;
+    lampada.style.width = (tamanhoAtual + 50) + "px";
+}
+function paraDiminuir(){
+    let tamanhoAtual = lampada.width;
+    if(tamanhoAtual > 80) {
+        let novoTamanho = tamanhoAtual - 50;
+        lampada.style.width = novoTamanho + "px";
+        lampada.style.height = "auto";
+}
 }
