@@ -304,6 +304,11 @@
       gap: 14px;
     }
 
+    .g2-centralizada {
+      max-width:fit-content;
+      margin: 0 auto;
+    }
+
     .g3 {
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
@@ -1027,7 +1032,8 @@
                 Essenciais para responsividade.</p>
               <p style="margin-top:8px;"><span class="badge b-em">em</span> <span class="badge b-rem">rem</span> <span
                   class="badge b-pct">%</span> <span class="badge b-vw">vw</span> <span class="badge b-vh">vh</span>
-                <span class="badge b-ch">ch</span></p>
+                <span class="badge b-ch">ch</span>
+              </p>
             </div>
           </div>
 
@@ -1179,7 +1185,8 @@
               <h3><span class="badge b-em">em</span> — relativo ao pai</h3>
               <p><code>em</code> é o tamanho de fonte do elemento atual. Em um elemento com fonte 20px,
                 <code>1em = 20px</code>. Quando usado para <code>font-size</code>, o pai é a referência; para outras
-                propriedades (<code>padding</code>, <code>margin</code>), o próprio elemento é a referência.</p>
+                propriedades (<code>padding</code>, <code>margin</code>), o próprio elemento é a referência.
+              </p>
               <div class="box box-amber">
                 <strong>Cascateamento:</strong> cada filho herda e multiplica pelo pai. Com <code>1.2em</code> em cada
                 nível: 14px → 16,8px → 20,16px → 24,2px. O texto cresce sem parar.
@@ -1276,7 +1283,7 @@
             incluindo top e bottom — <strong>a referência é sempre a largura do pai</strong>. Isso surpreende muita
             gente.</p>
 
-          <div class="g2">
+          <div class="g2 g2-centralizada">
             <div class="code" style="margin:0;">
               <span class="code-tag">Largura fluida</span><span class="cs">.pai</span> { <span class="cp">width</span>:
               <span class="cn">800</span><span class="cu">px</span>; }
@@ -1294,20 +1301,7 @@
                 class="cc">/* aspect ratio 16:9 */</span>
               }
             </div>
-            <div class="code" style="margin:0;">
-              <span class="code-tag">% vs vw — diferença chave</span><span class="cc">/* % — relativa ao PAI */</span>
-              <span class="cs">.filho</span> { <span class="cp">width</span>: <span class="cn">100</span><span
-                class="cu">%</span>; }
-              <span class="cc">/* = largura do elemento pai */</span>
 
-              <span class="cc">/* vw — relativa à VIEWPORT */</span>
-              <span class="cs">.filho</span> { <span class="cp">width</span>: <span class="cn">100</span><span
-                class="cu">vw</span>; }
-              <span class="cc">/* = largura da janela inteira */</span>
-
-              <span class="cc">/* Os dois podem ser diferentes
-                se o pai tiver padding/margin */</span>
-            </div>
           </div>
 
           <div class="box box-blue" style="margin-top:8px;">
@@ -1466,7 +1460,8 @@
               <h4>Largura do caractere "0"</h4>
               <p>Definida como a <em>advance measure</em> (medida de avanço) da largura do caractere
                 <strong>"0"</strong> na fonte atual. Em fontes monoespaçadas, <code>width: 40ch</code> garante
-                exatamente 40 caracteres na linha.</p>
+                exatamente 40 caracteres na linha.
+              </p>
               <p style="margin-top:8px;">O uso mais comum é definir <code>max-width</code> de parágrafos: textos com
                 60–75 caracteres por linha são considerados ideais para leitura. Com <code>max-width: 65ch</code>, isso
                 se ajusta automaticamente a qualquer tamanho de fonte.</p>
@@ -1519,7 +1514,8 @@
               </div>
             </div>
             <p style="font-size:12px;color:var(--soft);margin-top:6px;margin-bottom:0;">Perceba: diferente de
-              <code>px</code>, o limite em <code>ch</code> cresce quando o texto cresce.</p>
+              <code>px</code>, o limite em <code>ch</code> cresce quando o texto cresce.
+            </p>
           </div>
         </div>
         <div class="arrows">
@@ -1574,7 +1570,8 @@
             <div style="margin-top:10px;display:flex;flex-direction:column;gap:14px;">
               <div>
                 <p style="font-size:12px;color:var(--muted);margin-bottom:5px;"><code>h1</code> →
-                  <code>clamp(28px, 4vw, 48px)</code></p>
+                  <code>clamp(28px, 4vw, 48px)</code>
+                </p>
                 <div id="clamp-box"
                   style="font-size:32px;font-weight:700;font-family:'IBM Plex Sans',sans-serif;transition:font-size .08s;background:white;border:1px solid var(--border);border-radius:6px;padding:12px 16px;">
                   Título fluido
@@ -1584,7 +1581,8 @@
               </div>
               <div>
                 <p style="font-size:12px;color:var(--muted);margin-bottom:5px;"><code>p</code> →
-                  <code>clamp(14px, 2.5vw, 19px)</code></p>
+                  <code>clamp(14px, 2.5vw, 19px)</code>
+                </p>
                 <div id="clamp-p"
                   style="font-size:16px;max-width:65ch;line-height:1.65;transition:font-size .08s;background:white;border:1px solid var(--border);border-radius:6px;padding:12px 16px;">
                   Parágrafo com fonte fluida e <code>max-width: 65ch</code>. A fonte cresce até o máximo e para — nunca
