@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Viagens & Sonhos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+    <div class="container py-4">
+
+        <div class="alert alert-primary" role="alert">
+            <h3>Viagens e Sonhos</h3>
+        </div>
+
+        <form id="formulario">
+
+            <!-- Nome do cliente -->
+            <div class="row mb-3">
+                <div class="col-12 col-md-6">
+                    <label for="nome" class="form-label">Nome do Cliente</label>
+                    <input type="text" name="nome" id="nome" class="form-control"
+                        placeholder="Digite seu nome completo">
+                </div>
+            </div>
+
+            <!-- Pacotes -->
+            <h5 class="mb-3">Escolha um Pacote de Viagem</h5>
+            <div class="row mb-4">
+                <div class="col-12 col-md-4 mb-3">
+                    <div class="card h-100 p-3" id="cardBasico" onclick="selecionarPacote('basico', 1500)">
+                        <div class="card-body">
+                            <h5 class="card-title"> Pacote Básico</h5>
+                            <p class="card-text">Hospedagem 3 noites em hotel simples, café da manhã incluso e traslado
+                                do aeroporto.</p>
+                            <p class="card-text fw-bold text-primary">R$ 1.500,00</p>
+                            <input type="radio" name="pacote" id="pacoteBasico" value="1500" class="d-none">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-4 mb-3">
+                    <div class="card h-100 p-3" id="cardStandard" onclick="selecionarPacote('standard', 2800)">
+                        <div class="card-body">
+                            <h5 class="card-title"> Pacote Standard</h5>
+                            <p class="card-text">Hospedagem 5 noites em hotel 4 estrelas, café da manhã e jantar
+                                inclusos.</p>
+                            <p class="card-text fw-bold text-primary">R$ 2.800,00</p>
+                            <input type="radio" name="pacote" id="pacoteStandard" value="2800" class="d-none">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-4 mb-3">
+                    <div class="card h-100 p-3" id="cardPremium" onclick="selecionarPacote('premium', 5000)">
+                        <div class="card-body">
+                            <h5 class="card-title"> Pacote Premium</h5>
+                            <p class="card-text">Hospedagem 7 noites em resort 5 estrelas, all-inclusive, voos e seguro
+                                viagem.</p>
+                            <p class="card-text fw-bold text-primary">R$ 5.000,00</p>
+                            <input type="radio" name="pacote" id="pacotePremium" value="5000" class="d-none">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Adicionais e Cortesia -->
+            <div class="row mb-3">
+                <div class="col-12 col-md-4 mb-3">
+                    <label class="form-label">Adicionais</label>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="200" id="checkTranslado"
+                            name="adicionais">
+                        <label class="form-check-label" for="checkTranslado"> Translado (+R$ 200)</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="350" id="checkPasseios"
+                            name="adicionais">
+                        <label class="form-check-label" for="checkPasseios"> Passeios Turísticos (+R$ 350)</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="150" id="checkGuiadas" name="adicionais">
+                        <label class="form-check-label" for="checkGuiadas"> Visitas Guiadas (+R$ 150)</label>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-4 mb-3">
+                    <label class="form-label">Cortesia (+ R$ 50,00 cada)</label>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" value="50" id="cortesiaJantar" name="cortesia">
+                        <label class="form-check-label" for="cortesiaJantar"> 1 Jantar Especial</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" value="50" id="cortesiaAlmoco" name="cortesia">
+                        <label class="form-check-label" for="cortesiaAlmoco"> 1 Almoço Buffet</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" value="50" id="cortesiaTrem" name="cortesia">
+                        <label class="form-check-label" for="cortesiaTrem"> 1 Passeio de Trem</label>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-4 mb-3">
+                    <label for="codigoPromo" class="form-label">Código Promocional</label>
+                    <input type="text" id="codigoPromo" class="form-control" placeholder="Ex: FERIAS10">
+                </div>
+            </div>
+
+            <!-- Botões -->
+            <div class="mb-3">
+                <input onclick="calcular()" type="button" value="Calcular" class="btn btn-secondary me-2" id="calcular">
+                <button type="button" class="btn btn-primary me-2" id="calcularDesc">Calcular com Desconto</button>
+                <button type="button" class="btn btn-success me-2" id="novoPedido">Nova Reserva</button>
+                <button type="button" class="btn btn-outline-secondary" id="imprimirPedido">Imprimir</button>
+            </div>
+
+        </form>
+
+        <p id="valorPagar" class="fw-bold">Total à Pagar:</p>
+        <p id="valorPagarDesc" class="fw-bold text-success">Total à Pagar com Desconto:</p>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
