@@ -1,0 +1,35 @@
+.conteudo{
+    min-width: 20vw;
+    border:1px solid #a15b1dd6; 
+}
+
+.contdiv {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+}
+article{
+    background-color: #1da12cd6;
+    border: 2px solid#a11d1dd6;
+    margin: 10vh 10vh 10vh ;
+
+}
+section{
+    background-color: aqua;
+    border:2px solid #421330d6;
+    margin: 10vh 10vh 10vh;
+}
+article img{
+    width: 20vh;
+}
+table, tr, td{
+
+}
+.textos{
+    border: 1px solid #010201d6;
+}
+.contdivC{
+    display: flex;
+    flex-direction: column;
+}
