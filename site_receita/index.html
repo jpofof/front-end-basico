@@ -1,23 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
+
 <head>
 	<meta charset="UTF-8">
 	<title>Receita</title>
 	<link rel="stylesheet" href="style.css">
-</head>
+
 <body>
 
 	<header>
 		<h1>Site de Receitas</h1>
 		<nav>
-			<a href="#doces">Receitas doces</a>
-			<a href="#salgadas">Receitas salgadas</a>
+			<a href="#doces" class="receita">Receitas doces</a>
+			<a href="#salgadas" class="receita">Receitas salgadas</a>
 		</nav>
 	</header>
 
 	<main>
 		<section id="doces">
-		<h2>Doces</h2>
+			<h2>Doces</h2>
+			<div class="container-doces">
 				<article>
 					<h3>Lava cake</h3>
 					<img src="./img/lava-cake.jpg" alt="Imagem Receita X">
@@ -30,7 +32,7 @@
 						<li>100g de açúcar</li>
 					</ul>
 				</article>
-				<article>				
+				<article>
 					<h3>Cookie de chocolate</h3>
 					<img src="./img/cookie-chocolate.jpg" alt="Imagem Receita X">
 					<h4>Ingredientes</h4>
@@ -41,9 +43,11 @@
 						<li>2 ovos</li>
 					</ul>
 				</article>
+			</div>
 		</section>
 		<section id="salgadas">
-		<h2>Salgadas</h2>
+			<div class="container-doces">
+				<h2>Salgadas</h2>
 				<article>
 					<h3>Pizza</h3>
 					<img src="./img/pizza.jpg" alt="Imagem Receita X">
@@ -66,9 +70,11 @@
 						<li>4 dentes de alho picado</li>
 					</ul>
 				</article>
+			</div>
 		</section>
-		
+
 	</main>
 
 </body>
+
 </html>
