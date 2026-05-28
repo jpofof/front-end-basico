@@ -16,7 +16,7 @@ body {
 }
 
 header {
-    background-color: #ff914d;
+    background-color: #ff7723ec;
     padding: 2rem;
     text-align: center;
 }
@@ -25,6 +25,12 @@ h1 {
     font-size: 4rem;
     color: white;
     margin-bottom: 2rem;
+    text-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+header p {
+    font-size: 1.8rem;
+    color: #ffff;
+    margin-bottom: 3rem;
 }
 
 nav {
@@ -75,6 +81,11 @@ article {
     padding: 2rem;
     border-radius: 1.5rem;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.08);
+    transition: 0.3s;
+}
+
+article:hover {
+    transform: scale(1.05);
 }
 
 article h3 {
@@ -92,6 +103,7 @@ img {
     width: 22rem;
     border-radius: 1rem;
 }
+
 
 .conteudo-receita {
     display: flex;
